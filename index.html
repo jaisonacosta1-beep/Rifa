@@ -6,7 +6,7 @@
     <title>Sistema de Rifas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* MOTOR DE 15 TEMAS - COMPLETO Y SIN RECORTES */
+        /* MOTOR DE TEMAS */
         :root {
             --bg-color: #111111; 
             --card-bg: #222222; 
@@ -24,173 +24,51 @@
             --seleccion-bg: #2B6CB0; 
         }
 
-        [data-theme="gold"] { 
-            --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; 
-            --primary: #D69E2E; --disp-bg: #333333; --disp-txt: #D69E2E; 
-        }
-        [data-theme="mint"] { 
-            --bg-color: #E8F5E9; --card-bg: #FFFFFF; --text-main: #2D3748; 
-            --primary: #48BB78; --disp-bg: #E2E8F0; --disp-txt: #4A5568; 
-        }
-        [data-theme="ocean"] { 
-            --bg-color: #E0F2FE; --card-bg: #FFFFFF; --text-main: #0C4A6E; 
-            --primary: #0284C7; --disp-bg: #BAE6FD; --disp-txt: #0369A1; 
-        }
-        [data-theme="dark"] { 
-            --bg-color: #1A202C; --card-bg: #2D3748; --text-main: #F7FAFC; 
-            --primary: #63B3ED; --disp-bg: #4A5568; --disp-txt: #E2E8F0; 
-        }
-        [data-theme="neon"] { 
-            --bg-color: #050510; --card-bg: #1A1A2E; --text-main: #00FFCC; 
-            --primary: #FF00FF; --disp-bg: #16213E; --disp-txt: #00FFCC; 
-        }
-        [data-theme="ruby"] { 
-            --bg-color: #FFF1F2; --card-bg: #FFFFFF; --text-main: #881337; 
-            --primary: #E11D48; --disp-bg: #FFE4E6; --disp-txt: #9F1239; 
-        }
-        [data-theme="amethyst"] { 
-            --bg-color: #FAF5FF; --card-bg: #FFFFFF; --text-main: #4C1D95; 
-            --primary: #7C3AED; --disp-bg: #F3E8FF; --disp-txt: #5B21B6; 
-        }
-        [data-theme="forest"] { 
-            --bg-color: #F0FDF4; --card-bg: #FFFFFF; --text-main: #14532D; 
-            --primary: #16A34A; --disp-bg: #DCFCE7; --disp-txt: #166534; 
-        }
-        [data-theme="sunset"] { 
-            --bg-color: #FFF7ED; --card-bg: #FFFFFF; --text-main: #7C2D12; 
-            --primary: #EA580C; --disp-bg: #FFEDD5; --disp-txt: #9A3412; 
-        }
-        [data-theme="coffee"] { 
-            --bg-color: #FDF8F6; --card-bg: #FFFFFF; --text-main: #451A03; 
-            --primary: #92400E; --disp-bg: #F5EAE5; --disp-txt: #78350F; 
-        }
-        [data-theme="silver"] { 
-            --bg-color: #F8FAFC; --card-bg: #FFFFFF; --text-main: #334155; 
-            --primary: #64748B; --disp-bg: #F1F5F9; --disp-txt: #475569; 
-        }
-        [data-theme="cyber"] { 
-            --bg-color: #000000; --card-bg: #2B2B2B; --text-main: #FFE81F; 
-            --primary: #FF003C; --disp-bg: #404040; --disp-txt: #FFE81F; 
-        }
-        [data-theme="rose"] { 
-            --bg-color: #FDF2F8; --card-bg: #FFFFFF; --text-main: #831843; 
-            --primary: #DB2777; --disp-bg: #FCE7F3; --disp-txt: #9D174D; 
-        }
-        [data-theme="aqua"] { 
-            --bg-color: #F0FDFA; --card-bg: #FFFFFF; --text-main: #134E4A; 
-            --primary: #0D9488; --disp-bg: #CCFBF1; --disp-txt: #0F766E; 
-        }
-        [data-theme="solar"] { 
-            --bg-color: #FEFCE8; --card-bg: #FFFFFF; --text-main: #713F12; 
-            --primary: #CA8A04; --disp-bg: #FEF08A; --disp-txt: #854D0E; 
-        }
+        [data-theme="gold"] { --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; --primary: #D69E2E; --disp-bg: #333333; --disp-txt: #D69E2E; }
+        [data-theme="mint"] { --bg-color: #E8F5E9; --card-bg: #FFFFFF; --text-main: #2D3748; --primary: #48BB78; --disp-bg: #E2E8F0; --disp-txt: #4A5568; }
+        [data-theme="ocean"] { --bg-color: #E0F2FE; --card-bg: #FFFFFF; --text-main: #0C4A6E; --primary: #0284C7; --disp-bg: #BAE6FD; --disp-txt: #0369A1; }
+        [data-theme="dark"] { --bg-color: #1A202C; --card-bg: #2D3748; --text-main: #F7FAFC; --primary: #63B3ED; --disp-bg: #4A5568; --disp-txt: #E2E8F0; }
+        [data-theme="neon"] { --bg-color: #050510; --card-bg: #1A1A2E; --text-main: #00FFCC; --primary: #FF00FF; --disp-bg: #16213E; --disp-txt: #00FFCC; }
+        [data-theme="ruby"] { --bg-color: #FFF1F2; --card-bg: #FFFFFF; --text-main: #881337; --primary: #E11D48; --disp-bg: #FFE4E6; --disp-txt: #9F1239; }
+        [data-theme="amethyst"] { --bg-color: #FAF5FF; --card-bg: #FFFFFF; --text-main: #4C1D95; --primary: #7C3AED; --disp-bg: #F3E8FF; --disp-txt: #5B21B6; }
+        [data-theme="forest"] { --bg-color: #F0FDF4; --card-bg: #FFFFFF; --text-main: #14532D; --primary: #16A34A; --disp-bg: #DCFCE7; --disp-txt: #166534; }
+        [data-theme="sunset"] { --bg-color: #FFF7ED; --card-bg: #FFFFFF; --text-main: #7C2D12; --primary: #EA580C; --disp-bg: #FFEDD5; --disp-txt: #9A3412; }
+        [data-theme="coffee"] { --bg-color: #FDF8F6; --card-bg: #FFFFFF; --text-main: #451A03; --primary: #92400E; --disp-bg: #F5EAE5; --disp-txt: #78350F; }
+        [data-theme="silver"] { --bg-color: #F8FAFC; --card-bg: #FFFFFF; --text-main: #334155; --primary: #64748B; --disp-bg: #F1F5F9; --disp-txt: #475569; }
+        [data-theme="cyber"] { --bg-color: #000000; --card-bg: #2B2B2B; --text-main: #FFE81F; --primary: #FF003C; --disp-bg: #404040; --disp-txt: #FFE81F; }
+        [data-theme="rose"] { --bg-color: #FDF2F8; --card-bg: #FFFFFF; --text-main: #831843; --primary: #DB2777; --disp-bg: #FCE7F3; --disp-txt: #9D174D; }
+        [data-theme="aqua"] { --bg-color: #F0FDFA; --card-bg: #FFFFFF; --text-main: #134E4A; --primary: #0D9488; --disp-bg: #CCFBF1; --disp-txt: #0F766E; }
+        [data-theme="solar"] { --bg-color: #FEFCE8; --card-bg: #FFFFFF; --text-main: #713F12; --primary: #CA8A04; --disp-bg: #FEF08A; --disp-txt: #854D0E; }
 
         /* ESTILOS GLOBALES */
-        * { 
-            box-sizing: border-box; 
-            font-family: 'Montserrat', sans-serif; 
-        }
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            margin: 0; 
-            padding: 0; 
-            padding-bottom: 120px; 
-            position: relative; 
-            overflow-x: hidden; 
-            transition: background 0.3s;
-        }
+        * { box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 0; padding-bottom: 120px; position: relative; overflow-x: hidden; transition: background 0.3s; }
 
         /* ANIMACIONES FLOTANTES */
-        #contenedorAnimaciones { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100vw; 
-            height: 100vh; 
-            pointer-events: none; 
-            overflow: hidden; 
-        }
-        .item-flotante { 
-            position: absolute; 
-            bottom: -100px; 
-            animation: flotar linear infinite; 
-        }
-        @keyframes flotar { 
-            0% { transform: translateY(0) rotate(0deg); } 
-            100% { transform: translateY(-120vh) rotate(360deg); } 
-        }
+        #contenedorAnimaciones { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; overflow: hidden; }
+        .item-flotante { position: absolute; bottom: -100px; animation: flotar linear infinite; }
+        @keyframes flotar { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(360deg); } }
 
         /* HEADER */
-        .header { 
-            background: var(--card-bg); 
-            padding: 15px 20px; 
-            display: flex; 
-            align-items: center; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
-            position: relative; 
-            z-index: 10; 
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .logo-img { 
-            width: 50px; 
-            height: 50px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 2px solid var(--primary); 
-            background: #fff;
-        }
+        .header { background: var(--card-bg); padding: 15px 20px; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.5); position: relative; z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); background: #fff; }
         .header-text { margin-left: 15px; }
         .header-title { margin: 0; font-size: 18px; font-weight: 800; }
         .header-desc { margin: 0; font-size: 12px; opacity: 0.7; }
 
         /* CONTENEDORES Y TARJETAS */
-        .container { 
-            max-width: 500px; 
-            margin: 15px auto; 
-            padding: 0 15px; 
-            position: relative; 
-            z-index: 10; 
-        }
-        .card { 
-            background: var(--card-bg); 
-            border-radius: 15px; 
-            padding: 20px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
-            margin-bottom: 15px; 
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+        .container { max-width: 500px; margin: 15px auto; padding: 0 15px; position: relative; z-index: 10; }
+        .card { background: var(--card-bg); border-radius: 15px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
         
         h2, h3 { margin-top: 0; }
         
         /* FORMULARIOS */
-        input, select { 
-            width: 100%; 
-            padding: 12px; 
-            margin-bottom: 15px; 
-            border-radius: 10px; 
-            border: 1px solid #555; 
-            font-size: 14px; 
-            background: var(--disp-bg); 
-            color: var(--text-main); 
-        }
+        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #555; font-size: 14px; background: var(--disp-bg); color: var(--text-main); }
         input[type="color"] { padding: 2px; height: 40px; cursor: pointer; }
         input[type="file"] { padding: 10px; background: var(--disp-bg); border: 1px dashed var(--primary); }
         
         /* BOTONES */
-        .btn { 
-            width: 100%; 
-            padding: 15px; 
-            border-radius: 12px; 
-            border: none; 
-            background: var(--primary); 
-            color: #111; 
-            font-weight: bold; 
-            font-size: 16px; 
-            cursor: pointer; 
-            transition: 0.2s; 
-            margin-bottom: 10px;
-        }
+        .btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--primary); color: #111; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
         .btn:hover { transform: translateY(-2px); opacity: 0.9; }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-danger { background: #E53E3E; color: white; }
@@ -198,38 +76,11 @@
         .btn-small { padding: 8px; font-size: 12px; width: auto; margin: 2px; }
 
         /* ELEMENTOS DEL CLIENTE */
-        .premio-img { 
-            width: 100%; 
-            height: 160px; 
-            object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 15px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .countdown { 
-            background: var(--primary); 
-            color: #111; 
-            padding: 8px; 
-            border-radius: 8px; 
-            text-align: center; 
-            font-weight: bold; 
-            margin-bottom: 15px; 
-            letter-spacing: 1px; 
-            font-size: 14px;
-        }
+        .premio-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .countdown { background: var(--primary); color: #111; padding: 8px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px; font-size: 14px; }
         
         /* BANNER GANADOR */
-        .banner-ganador { 
-            background: linear-gradient(135deg, #FFD700, #F59E0B); 
-            color: #000; 
-            padding: 15px; 
-            border-radius: 12px; 
-            text-align: center; 
-            font-weight: bold; 
-            margin-bottom: 15px; 
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); 
-            animation: pulse 2s infinite; 
-        }
+        .banner-ganador { background: linear-gradient(135deg, #FFD700, #F59E0B); color: #000; padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         /* LEYENDA */
@@ -239,82 +90,48 @@
 
         /* CUADRÍCULA */
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-        .num { 
-            aspect-ratio: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 16px; 
-            transition: 0.2s; 
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+        .num { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.2s; border: 1px solid rgba(255,255,255,0.05); }
         .num.disponible { background: var(--disp-bg); color: var(--disp-txt); }
         .num.agarrado { background: var(--agarrado-bg); color: var(--agarrado-txt); cursor: not-allowed; }
         .num.seleccionado { background: var(--seleccion-bg); color: white; transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid white; }
         .num.reservado-admin { background: var(--res-bg); color: var(--res-txt); }
         .num.vendido-admin { background: var(--vend-bg); color: var(--vend-txt); text-decoration: line-through; opacity: 0.7; }
 
+        /* MENÚ DE RIFAS CLIENTE */
+        .rifa-client-item { background: var(--disp-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; cursor: pointer; transition: transform 0.2s; }
+        .rifa-client-item:hover { transform: scale(1.02); background: var(--primary); color: #111; }
+        .rifa-client-item h3 { margin: 0 0 5px 0; }
+
         /* CARRITO FLOTANTE */
-        .carrito-bar { 
-            position: fixed; 
-            bottom: -100px; 
-            left: 0; 
-            width: 100%; 
-            background: var(--card-bg); 
-            padding: 15px 20px; 
-            box-shadow: 0 -10px 20px rgba(0,0,0,0.5); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            transition: bottom 0.3s; 
-            z-index: 1000; 
-            border-radius: 20px 20px 0 0; 
-            border-top: 2px solid var(--primary);
-        }
+        .carrito-bar { position: fixed; bottom: -100px; left: 0; width: 100%; background: var(--card-bg); padding: 15px 20px; box-shadow: 0 -10px 20px rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; transition: bottom 0.3s; z-index: 1000; border-radius: 20px 20px 0 0; border-top: 2px solid var(--primary); }
         .carrito-bar.activo { bottom: 0; }
 
         /* MODALES */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.9); 
-            z-index: 2000; 
-            justify-content: center; 
-            align-items: center; 
-        }
-        .modal-content { 
-            background: var(--card-bg); 
-            padding: 25px; 
-            border-radius: 20px; 
-            width: 90%; 
-            max-width: 400px; 
-            max-height: 90vh; 
-            overflow-y: auto; 
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; max-height: 90vh; overflow-y: auto; }
 
-        /* TICKET PROFESIONAL TIPO RECIBO */
+        /* TICKET PROFESIONAL TIPO RECIBO LARGO */
         .ticket-receipt { 
             background: #ffffff; 
             color: #000000; 
-            padding: 20px; 
+            padding: 25px 20px; 
             border-radius: 8px; 
             font-family: 'Courier New', Courier, monospace; 
             margin-bottom: 20px; 
             text-align: left; 
             border: 1px solid #cccccc; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            position: relative;
         }
-        .ticket-receipt h3 { text-align: center; margin: 0 0 10px 0; border-bottom: 2px dashed #000; padding-bottom: 10px; font-size: 18px; }
-        .ticket-receipt p { margin: 5px 0; font-size: 14px; line-height: 1.4; }
-        .ticket-receipt .ticket-nums { font-size: 22px; font-weight: bold; text-align: center; margin: 15px 0; padding: 10px; border: 2px solid #000; border-radius: 5px; word-break: break-word; }
-        .ticket-receipt .ticket-footer { text-align: center; font-size: 11px; border-top: 2px dashed #000; padding-top: 10px; margin-top: 10px; }
+        .ticket-receipt::before, .ticket-receipt::after { content: ''; position: absolute; left: 0; right: 0; height: 10px; background-size: 20px 20px; }
+        .ticket-receipt::before { top: -5px; background-image: radial-gradient(circle at 10px 0, transparent 10px, #ffffff 11px); }
+        .ticket-receipt::after { bottom: -5px; background-image: radial-gradient(circle at 10px 10px, transparent 10px, #ffffff 11px); }
+        
+        .ticket-receipt h3 { text-align: center; margin: 0 0 10px 0; border-bottom: 2px dashed #000; padding-bottom: 10px; font-size: 18px; text-transform: uppercase;}
+        .ticket-receipt p { margin: 5px 0; font-size: 13px; line-height: 1.4; display: flex; justify-content: space-between;}
+        .ticket-receipt .ticket-nums { font-size: 20px; font-weight: bold; text-align: center; margin: 15px 0; padding: 15px 10px; border: 2px solid #000; border-radius: 5px; word-break: break-word; background: #f9f9f9;}
+        .ticket-receipt .ticket-footer { text-align: justify; font-size: 10px; border-top: 2px dashed #000; padding-top: 15px; margin-top: 15px; color: #555;}
+        .ticket-receipt .total-row { font-size: 16px; font-weight: bold; border-top: 1px solid #000; padding-top: 10px; margin-top: 10px;}
 
         /* TABLAS Y MENÚS DE ADMINISTRACIÓN */
         table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -357,27 +174,35 @@
 
     <div id="vistaCliente" class="container">
         
-        <div id="bannerGanador" class="banner-ganador" style="display: none;">
-            <h2 style="margin:0 0 5px 0;">🎉 ¡SORTEO FINALIZADO! 🎉</h2>
-            <p style="margin:0; font-size:14px;">El número ganador es el <strong id="boletoGanadorVisual" style="font-size:24px;"></strong></p>
-            <p style="margin:5px 0 0 0;">¡Felicidades a <strong id="nombreGanadorVisual"></strong>!</p>
+        <div id="menuRifasCliente" style="display: none;">
+            <h2 style="text-align: center; margin-bottom: 20px;">Sorteos Disponibles</h2>
+            <div id="listaRifasDisponibles">
+                </div>
         </div>
 
-        <div class="card" style="text-align: center;">
-            <div id="temporizador" class="countdown">Sorteo en: 00d 00h 00m 00s</div>
-            <img id="imgPremio" src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" class="premio-img">
-            <h2 id="nombrePremio" style="margin-bottom: 5px;">Gran Premio</h2>
-            <p style="margin: 0; color: var(--primary); font-weight: bold; font-size: 18px;" id="precioBoleto">$5.00 <span style="font-size: 12px; color: gray;">x Boleto</span></p>
-        </div>
-
-        <div class="card">
-            <h3 style="text-align: center;">¡Escoge tus números!</h3>
-            <div class="leyenda">
-                <div class="ley-item"><div class="ley-color" style="background: var(--disp-bg);"></div> Libre</div>
-                <div class="ley-item"><div class="ley-color" style="background: var(--agarrado-bg);"></div> Agarrado</div>
-                <div class="ley-item"><div class="ley-color" style="background: var(--seleccion-bg);"></div> Tu Elección</div>
+        <div id="contenidoRifaActiva">
+            <div id="bannerGanador" class="banner-ganador" style="display: none;">
+                <h2 style="margin:0 0 5px 0;">🎉 ¡SORTEO FINALIZADO! 🎉</h2>
+                <p style="margin:0; font-size:14px;">El número ganador es el <strong id="boletoGanadorVisual" style="font-size:24px;"></strong></p>
+                <p style="margin:5px 0 0 0;">¡Felicidades a <strong id="nombreGanadorVisual"></strong>!</p>
             </div>
-            <div class="grid" id="cuadriculaCliente"></div>
+
+            <div class="card" style="text-align: center;">
+                <div id="temporizador" class="countdown">Sorteo en: 00d 00h 00m 00s</div>
+                <img id="imgPremio" src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" class="premio-img">
+                <h2 id="nombrePremio" style="margin-bottom: 5px;">Gran Premio</h2>
+                <p style="margin: 0; color: var(--primary); font-weight: bold; font-size: 18px;" id="precioBoleto">$5.00 <span style="font-size: 12px; color: gray;">x Boleto</span></p>
+            </div>
+
+            <div class="card">
+                <h3 style="text-align: center;">¡Escoge tus números!</h3>
+                <div class="leyenda">
+                    <div class="ley-item"><div class="ley-color" style="background: var(--disp-bg);"></div> Libre</div>
+                    <div class="ley-item"><div class="ley-color" style="background: var(--agarrado-bg);"></div> Agarrado</div>
+                    <div class="ley-item"><div class="ley-color" style="background: var(--seleccion-bg);"></div> Tu Elección</div>
+                </div>
+                <div class="grid" id="cuadriculaCliente"></div>
+            </div>
         </div>
     </div>
 
@@ -466,7 +291,6 @@
                 <input type="file" id="uploadLogoInput" accept="image/*" onchange="subirImagenFirebase(event, 'logoApp', 'logoUrl')">
                 <label>Foto del Premio (Subir):</label>
                 <input type="file" id="uploadPremioInput" accept="image/*" onchange="subirImagenFirebase(event, 'imgPremio', 'premioUrl')">
-                
                 <label>Plantilla Visual:</label>
                 <select id="temaSelect" onchange="cambiarTema()">
                     <option value="gold">Dorado Premium</option>
@@ -563,8 +387,10 @@
             <input type="tel" id="clienteTelefono" placeholder="Teléfono / WhatsApp" required>
             <select id="clienteMetodo">
                 <option value="Yappy">Yappy</option>
-                <option value="Banco General">Banco General</option>
+                <option value="Transferencia">Transferencia Bancaria</option>
                 <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="Otros">Otros</option>
             </select>
             <button class="btn" onclick="generarTicket()">Confirmar y Ver Ticket</button>
             <button class="btn btn-danger" onclick="cerrarModales()">Cancelar</button>
@@ -588,7 +414,7 @@
             <p style="text-align: center; color: var(--primary);">Boleto Actual: <strong id="editBoletoNum"></strong></p>
             <input type="hidden" id="editBoletoNumHidden">
             
-            <label style="font-size: 12px; font-weight: bold;">Cambiar a otro número (Opcional):</label>
+            <label style="font-size: 12px; font-weight: bold;">Mover a otro número (Opcional):</label>
             <input type="number" id="editNuevoNum" placeholder="Nuevo número" style="border: 2px solid var(--primary);">
             
             <label style="font-size: 12px; font-weight: bold;">Nombre del Cliente:</label>
@@ -621,17 +447,26 @@
     <div id="modalTicket" class="modal">
         <div class="modal-content" style="background:#fff;">
             <div class="ticket-receipt">
-                <h3>COMPROBANTE DE PARTICIPACIÓN</h3>
-                <p><strong>Rifa:</strong> <span id="ticketRifaNombre"></span></p>
-                <p><strong>Cliente:</strong> <span id="ticketNombre"></span></p>
-                <p><strong>Método de Pago:</strong> <span id="ticketPago"></span></p>
+                <h3>🎟️ COMPROBANTE DE RESERVA</h3>
                 
+                <p><span>Fecha:</span> <strong id="ticketFecha"></strong></p>
+                <p><span>Transacción ID:</span> <strong id="ticketTxID"></strong></p>
+                <p><span>Rifa:</span> <strong id="ticketRifaNombre"></strong></p>
+                
+                <hr style="border-top: 1px dashed #000; margin: 10px 0;">
+                
+                <p><span>Cliente:</span> <strong id="ticketNombre"></strong></p>
+                <p><span>Método de Pago:</span> <strong id="ticketPago"></strong></p>
+                
+                <p style="text-align: center; margin-top: 15px;"><strong>Boletos Seleccionados:</strong></p>
                 <div class="ticket-nums" id="ticketNumeros"></div>
                 
-                <p style="text-align: center; font-weight: bold; font-size: 16px;">Total a pagar: $<span id="ticketMontoTotal"></span></p>
+                <p><span>Precio por boleto:</span> <strong>$<span id="ticketPrecioUnitario"></span></strong></p>
+                <p class="total-row"><span>TOTAL A PAGAR:</span> <strong>$<span id="ticketMontoTotal"></span></strong></p>
                 
                 <div class="ticket-footer">
-                    * Este boleto está sujeto a verificación de pago antes de ser validado y marcado como oficial en el sistema. Conserve su captura de pantalla.
+                    <strong>IMPORTANTE:</strong><br>
+                    Su reserva estará en estado de "Revisión" hasta que el administrador verifique el pago en la cuenta bancaria o cartera digital seleccionada. Una vez verificado, sus números pasarán a estado oficial (Pagado). Por favor envíe la captura de pantalla de este comprobante y su pago al WhatsApp del organizador. ¡Mucha suerte!
                 </div>
             </div>
             <button class="btn btn-success" onclick="finalizarCompra()">Enviar Captura a WhatsApp</button>
@@ -646,7 +481,7 @@
         import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
         // ========================================================
-        // TUS NUEVAS CREDENCIALES DE FIREBASE (PROYECTO: rifa-5e1ec)
+        // TUS CREDENCIALES DE FIREBASE (PROYECTO: rifa-5e1ec)
         // ========================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAX_lifTRi_uVinpIBUh3NjH-4fH0YF8Mk",
@@ -676,7 +511,7 @@
         let rifaActivaId = urlParams.get('rifa'); 
         let isClientView = urlParams.get('admin') !== 'true';
 
-        // Ocultar botón de configuración al cliente
+        // Ocultar botón de configuración al cliente (Protección)
         if(rifaActivaId && isClientView) {
             let btnAdmin = document.getElementById('btnEngranaje');
             if(btnAdmin) btnAdmin.style.display = 'none';
@@ -685,7 +520,7 @@
         // ================= ARRANQUE Y CARGA DE DATOS =================
         async function initAppGlobal() {
             try {
-                // Cargar datos globales y lista maestra
+                // Cargar datos globales y lista maestra desde Firestore
                 const docGlobal = await getDoc(doc(db, "CronoRifas_System", "GlobalSettings"));
                 if(docGlobal.exists()) configGlobal = docGlobal.data();
                 else configGlobal = { wa: '', tgToken: '', tgChat: '' };
@@ -696,13 +531,13 @@
                 
                 usaFirebase = true;
             } catch (error) {
-                console.warn("Error Firebase, usando Modo Local", error);
+                console.warn("Error Firebase (¿Reglas bloqueadas?). Usando Modo Local Temporal", error);
                 usaFirebase = false;
                 listaRifasMaster = JSON.parse(localStorage.getItem('local_master')) || {};
                 configGlobal = JSON.parse(localStorage.getItem('local_global')) || { wa: '', tgToken: '', tgChat: '' };
             }
 
-            // Llenar inputs globales en el panel
+            // Llenar inputs globales en el panel de admin
             document.getElementById('globalNumWa').value = configGlobal.wa || '';
             document.getElementById('globalTgToken').value = configGlobal.tgToken || '';
             document.getElementById('globalTgChat').value = configGlobal.tgChat || '';
@@ -718,19 +553,46 @@
                 }
                 
                 window.aplicarConfiguracionVisual();
-                window.renderCuadriculaCliente();
                 
                 if(!isClientView) {
                     document.getElementById('vistaCliente').style.display = 'none';
                     document.getElementById('vistaAdmin').style.display = 'block';
                     window.abrirModoEdicionRifa(rifaActivaId);
+                } else {
+                    window.renderCuadriculaCliente();
                 }
             } else if (!rifaActivaId) {
-                document.getElementById('tituloAppVisual').innerText = "Sistema de Rifas";
-                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1;'>No hay rifa activa o no existe. Inicia sesión (⚙️) para crear una.</p>";
+                // Generar Menú Principal de Rifas para el cliente si entra al link base
+                generarMenuInicioCliente();
+            } else {
+                document.getElementById('tituloAppVisual').innerText = "Rifa no encontrada";
+                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>La rifa solicitada no existe o fue eliminada.</p>";
                 document.getElementById('precioBoleto').innerText = "";
             }
             window.generarAnimaciones();
+        }
+
+        function generarMenuInicioCliente() {
+            if(Object.keys(listaRifasMaster).length > 0 && isClientView) {
+                document.getElementById('contenidoRifaActiva').style.display = 'none';
+                document.getElementById('menuRifasCliente').style.display = 'block';
+                const cont = document.getElementById('listaRifasDisponibles');
+                cont.innerHTML = '';
+                
+                for(let id in listaRifasMaster) {
+                    let r = listaRifasMaster[id];
+                    cont.innerHTML += `
+                        <div class="rifa-client-item" onclick="window.location.href='?rifa=${id}'">
+                            <h3>🎟️ ${r.nombreApp || id}</h3>
+                            <p style="font-size: 12px; margin:0;">${r.totalNumeros} Boletos disponibles | Precio: $${r.precio}</p>
+                        </div>
+                    `;
+                }
+            } else {
+                document.getElementById('tituloAppVisual').innerText = "Sistema de Rifas";
+                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>Inicia sesión en ⚙️ para comenzar a crear rifas.</p>";
+                document.getElementById('precioBoleto').innerText = "";
+            }
         }
 
         // ================= SINCRONIZACIÓN =================
@@ -763,8 +625,7 @@
         };
 
         window.renderListaMisRifas = function() {
-            const cont = document.getElementById('listaMisRifas'); 
-            cont.innerHTML = '';
+            const cont = document.getElementById('listaMisRifas'); cont.innerHTML = '';
             if(Object.keys(listaRifasMaster).length === 0) return cont.innerHTML = '<p style="color:gray;">No tienes rifas creadas. Crea una nueva arriba.</p>';
 
             for(let id in listaRifasMaster) {
@@ -774,7 +635,7 @@
                         <h4>${r.nombreApp || id}</h4>
                         <p style="font-size:11px; margin: 0 0 10px 0;">ID: ${id} | Boletos: ${r.totalNumeros}</p>
                         <div style="display:flex; gap:5px; flex-wrap:wrap;">
-                            <button class="btn btn-small" style="background:#48BB78; color:#fff;" onclick="abrirModoEdicionRifa('${id}')">⚙️ Editar</button>
+                            <button class="btn btn-small" style="background:#48BB78; color:#fff;" onclick="abrirModoEdicionRifa('${id}')">⚙️ Administrar</button>
                             <button class="btn btn-outline btn-small" onclick="abrirModalQR('${id}')">🔗 Link/QR</button>
                             <button class="btn btn-success btn-small" onclick="generarPDFRifa('${id}')">📄 PDF Carta</button>
                             <button class="btn btn-danger btn-small" onclick="borrarRifaEspecifica('${id}')">🗑️ Borrar</button>
@@ -795,11 +656,12 @@
         };
 
         window.borrarTodoElSistema = async function() {
-            if(confirm("⚠️ ¿Estás seguro de borrar TODAS las rifas y bases de datos permanentemente?")) {
+            if(confirm("⚠️ PELIGRO: ¿Borrar TODAS las rifas y bases de datos permanentemente?")) {
                 if(usaFirebase) {
                     let promesas = [];
                     for(let id in listaRifasMaster) promesas.push(deleteDoc(doc(db, "CronoRifas_System", "DB_" + id)));
                     promesas.push(deleteDoc(doc(db, "CronoRifas_System", "MasterList")));
+                    promesas.push(deleteDoc(doc(db, "CronoRifas_System", "GlobalSettings")));
                     try { await Promise.all(promesas); } catch(e) {}
                 }
                 localStorage.clear();
@@ -828,10 +690,8 @@
                 dbActiva = dbSnap.exists() ? dbSnap.data() : {};
             } else { dbActiva = JSON.parse(localStorage.getItem('local_db_' + id)) || {}; }
             
-            // Ajustar menús
             document.getElementById('menuGlobalAdmin').style.display = 'none';
             document.getElementById('menuEdicionRifa').style.display = 'flex';
-            document.getElementById('btnVolverMisRifas').style.display = 'block';
             
             document.getElementById('inputNombreApp').value = configActiva.nombreApp || '';
             document.getElementById('inputTotalNumeros').value = configActiva.totalNumeros || 100;
@@ -851,11 +711,10 @@
 
         window.cerrarEdicionRifa = function() {
             document.getElementById('menuEdicionRifa').style.display = 'none';
-            document.getElementById('btnVolverMisRifas').style.display = 'none';
             document.getElementById('menuGlobalAdmin').style.display = 'flex';
             document.getElementById('adminRifaActualTitulo').innerText = '';
             window.cambiarTabGlobal('misrifas');
-        }
+        };
 
         window.guardarConfigRifa = async function() {
             configActiva.nombreApp = document.getElementById('inputNombreApp').value;
@@ -892,8 +751,7 @@
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
             if(configActiva.premioUrl) document.getElementById('imgPremio').src = configActiva.premioUrl;
             
-            // Ganador
-            if(configActiva.ganador !== undefined && configActiva.ganador !== null && configActiva.ganador !== "") {
+            if(configActiva.ganador) {
                 document.getElementById('bannerGanador').style.display = 'block';
                 document.getElementById('boletoGanadorVisual').innerText = configActiva.ganador;
                 document.getElementById('nombreGanadorVisual').innerText = configActiva.ganadorNombre;
@@ -971,12 +829,20 @@
             await sincronizarDBRifa(); 
             window.enviarTelegram(nom, tel, numerosSeleccionados.join(', '));
             
-            // Recibo Profesional UI
+            // Llenar Recibo Profesional
+            const fechaActual = new Date();
+            const txID = "TX-" + Math.floor(Math.random() * 1000000);
+            
+            document.getElementById('ticketFecha').innerText = fechaActual.toLocaleDateString() + " " + fechaActual.toLocaleTimeString();
+            document.getElementById('ticketTxID').innerText = txID;
             document.getElementById('ticketRifaNombre').innerText = configActiva.nombreApp || 'Crono Rifas';
             document.getElementById('ticketNombre').innerText = nom; 
             document.getElementById('ticketPago').innerText = metodo;
             document.getElementById('ticketNumeros').innerText = numerosSeleccionados.join(' - ');
-            document.getElementById('ticketMontoTotal').innerText = (numerosSeleccionados.length * (configActiva.precio || 5)).toFixed(2);
+            
+            let precio = configActiva.precio || 5;
+            document.getElementById('ticketPrecioUnitario').innerText = parseFloat(precio).toFixed(2);
+            document.getElementById('ticketMontoTotal').innerText = (numerosSeleccionados.length * precio).toFixed(2);
 
             window.cerrarModales(); 
             document.getElementById('modalTicket').style.display = 'flex'; 
@@ -1055,7 +921,6 @@
                 dbActiva[numNuevo] = { estado: estadoActual, nombre: nom, telefono: tel };
                 delete dbActiva[numViejo];
             } else {
-                // Solo se edita el nombre/teléfono
                 dbActiva[numViejo].nombre = nom; 
                 dbActiva[numViejo].telefono = tel;
             }
@@ -1077,9 +942,8 @@
 
         window.generarPDFRifa = function(id) {
             let configPDF = listaRifasMaster[id]; 
-            let dbPDF = usaFirebase ? dbActiva : (JSON.parse(localStorage.getItem('local_db_' + id)) || {}); 
-            // Nota: Si se presiona desde el menú maestro y hay varias rifas, lo ideal es que imprima la db local o haga un getDoc
-            // Aquí usamos la dbActiva actual por simplicidad en el entorno local.
+            // Para asegurar, jalamos la DB de storage si es la actual, si no avisamos.
+            let dbPDF = (id === rifaActivaId) ? dbActiva : (JSON.parse(localStorage.getItem('local_db_' + id)) || {}); 
             
             let html = `
             <div class="print-letter">
@@ -1097,8 +961,8 @@
             let ingresos = 0;
             for(let i=0; i<configPDF.totalNumeros; i++) {
                 let n = i.toString();
-                if(dbActiva[n]) { 
-                    let item = dbActiva[n];
+                if(dbPDF[n]) { 
+                    let item = dbPDF[n];
                     html += `<tr style="color: #333;">
                         <td style="border: 1px solid #ccc; padding:8px;">${n}</td>
                         <td style="border: 1px solid #ccc; padding:8px;">${item.nombre}</td>
@@ -1135,11 +999,11 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader(); reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; }; reader.readAsDataURL(file);
-            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
+            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo). Verifica tus Reglas en Firestore y Storage.");
 
             const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
+            uploadTask.on('state_changed', null, err => alert("Error subiendo foto. Revisa reglas de Storage."), () => {
                 getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto en la nube!"); });
             });
         };
@@ -1153,19 +1017,26 @@
                 document.getElementById('vistaCliente').style.display = 'none'; 
                 document.getElementById('vistaAdmin').style.display = 'block';
                 window.renderListaMisRifas(); 
-                window.cerrarEdicionRifa(); 
+                
+                // Si estaba dentro de una rifa, asegurar que vayamos al panel global
+                document.getElementById('menuEdicionRifa').style.display = 'none';
+                document.getElementById('btnVolverMisRifas').style.display = 'none';
+                document.getElementById('menuGlobalAdmin').style.display = 'flex';
+                document.getElementById('adminRifaActualTitulo').innerText = '';
+                window.cambiarTabGlobal('misrifas');
+
             } else alert("Clave errónea. Intenta con admin123");
         };
 
         window.cerrarPanelAdminYVerCliente = () => { 
             if(rifaActivaId) { window.location.href = `${window.location.href.split('?')[0]}?rifa=${rifaActivaId}`; } 
-            else { document.getElementById('vistaAdmin').style.display = 'none'; document.getElementById('vistaCliente').style.display = 'block'; } 
+            else { window.location.href = window.location.href.split('?')[0]; } 
         };
         
         window.cerrarModales = () => document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
         
         window.cambiarTabGlobal = tab => { 
-            document.querySelectorAll('.admin-tab, .admin-nav button').forEach(el => el.classList.remove('active')); 
+            document.querySelectorAll('.admin-tab, #menuGlobalAdmin button').forEach(el => el.classList.remove('active')); 
             document.getElementById(`tab-${tab}`).classList.add('active'); 
             document.getElementById(`tabBtn${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active'); 
         };
@@ -1214,3 +1085,5 @@
         // INICIAR LA APP
         initAppGlobal();
     </script>
+</body>
+</html>
