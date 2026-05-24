@@ -6,7 +6,7 @@
     <title>Sistema de Rifas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* MOTOR DE 15 TEMAS - COMPLETO */
+        /* MOTOR DE 15 TEMAS - COMPLETO Y SIN RECORTES */
         :root {
             --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; 
             --primary: #D69E2E; --primary-hover: #B7791F;
@@ -43,7 +43,7 @@
 
         /* HEADER */
         .header { background: var(--card-bg); padding: 15px 20px; display: flex; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.5); position: relative; z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); background: #fff; }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); background: #fff; transition: opacity 0.3s; }
         .header-text { margin-left: 15px; }
         .header-title { margin: 0; font-size: 18px; font-weight: 800; }
         .header-desc { margin: 0; font-size: 12px; opacity: 0.7; }
@@ -67,7 +67,7 @@
         .btn-small { padding: 8px; font-size: 12px; width: auto; margin: 2px; }
 
         /* VISTA CLIENTE */
-        .premio-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .premio-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: opacity 0.3s; }
         .countdown { background: var(--primary); color: #111; padding: 8px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px; font-size: 14px; }
         
         /* BANNER GANADOR */
@@ -613,7 +613,7 @@
             };
             if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal); } catch(e){} }
             localStorage.setItem('local_global', JSON.stringify(configGlobal));
-            alert("Configuración Universal y Contraseña Guardadas correctamente.");
+            alert("✅ Configuración Universal y Contraseña Guardadas.");
         };
 
         // ================= GESTOR CENTRAL DE RIFAS =================
@@ -663,10 +663,8 @@
             listaRifasMaster[id] = { nombreApp: nom, totalNumeros: 100, precio: 5, tema: 'gold', premioUrl: '' };
             await sincronizarMaster();
             
-            // Cerrar modal y dar aviso
             window.cerrarModales(); 
             alert("✅ Rifa '" + nom + "' creada exitosamente.");
-            
             window.location.href = `${window.location.href.split('?')[0]}?rifa=${id}&admin=true`;
         };
 
@@ -746,7 +744,7 @@
             listaRifasMaster[rifaActivaId] = configActiva; 
             await sincronizarMaster(); 
             
-            alert("💾 Configuración de rifa guardada correctamente.");
+            alert("💾 Configuración de Rifa Guardada.");
             window.aplicarConfiguracionVisual(); 
             window.renderCuadriculaAdmin();
         };
@@ -906,7 +904,7 @@
             }).catch(e => console.log(e));
         };
 
-        // ================= PANEL ADMINISTRADOR Y EDICIÓN (Cambio de Número) =================
+        // ================= PANEL ADMINISTRADOR Y EDICIÓN =================
         window.actualizarListaAdmin = function() {
             const tbody = document.querySelector('#tablaParticipantes tbody'); tbody.innerHTML = '';
             for(let num in dbActiva) {
@@ -1056,12 +1054,13 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader(); reader.onload = e => { document.getElementById('logoApp').src = e.target.result; configGlobal.logoUrl = e.target.result; }; reader.readAsDataURL(file);
+            
             if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
 
             const storageRef = ref(storage, `CronoRifas_System/Global/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
             uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(url => { configGlobal.logoUrl = url; alert("¡Logo Global en la nube!"); });
+                getDownloadURL(uploadTask.snapshot.ref).then(url => { configGlobal.logoUrl = url; alert("¡Logo Global guardado en la nube!"); });
             });
         };
 
@@ -1069,12 +1068,13 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader(); reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; }; reader.readAsDataURL(file);
+            
             if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
 
             const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
             uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto en la nube!"); });
+                getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto de Rifa guardada en la nube!"); });
             });
         };
 
