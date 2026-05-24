@@ -6,24 +6,16 @@
     <title>Sistema de Rifas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* MOTOR DE TEMAS */
+        /* MOTOR DE 15 TEMAS - COMPLETO */
         :root {
-            --bg-color: #111111; 
-            --card-bg: #222222; 
-            --text-main: #F6E05E; 
-            --primary: #D69E2E; 
-            --primary-hover: #B7791F;
-            --disp-bg: #333333; 
-            --disp-txt: #D69E2E;
-            --res-bg: #F6E05E; 
-            --res-txt: #744210; 
-            --vend-bg: #FC8181; 
-            --vend-txt: #7B341E; 
-            --agarrado-bg: #48BB78; 
-            --agarrado-txt: #FFFFFF; 
+            --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; 
+            --primary: #D69E2E; --primary-hover: #B7791F;
+            --disp-bg: #333333; --disp-txt: #D69E2E;
+            --res-bg: #F6E05E; --res-txt: #744210; 
+            --vend-bg: #FC8181; --vend-txt: #7B341E; 
+            --agarrado-bg: #48BB78; --agarrado-txt: #FFFFFF; 
             --seleccion-bg: #2B6CB0; 
         }
-
         [data-theme="gold"] { --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; --primary: #D69E2E; --disp-bg: #333333; --disp-txt: #D69E2E; }
         [data-theme="mint"] { --bg-color: #E8F5E9; --card-bg: #FFFFFF; --text-main: #2D3748; --primary: #48BB78; --disp-bg: #E2E8F0; --disp-txt: #4A5568; }
         [data-theme="ocean"] { --bg-color: #E0F2FE; --card-bg: #FFFFFF; --text-main: #0C4A6E; --primary: #0284C7; --disp-bg: #BAE6FD; --disp-txt: #0369A1; }
@@ -62,12 +54,11 @@
         
         h2, h3 { margin-top: 0; }
         
-        /* FORMULARIOS */
+        /* FORMULARIOS Y BOTONES */
         input, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #555; font-size: 14px; background: var(--disp-bg); color: var(--text-main); }
         input[type="color"] { padding: 2px; height: 40px; cursor: pointer; }
         input[type="file"] { padding: 10px; background: var(--disp-bg); border: 1px dashed var(--primary); }
         
-        /* BOTONES */
         .btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--primary); color: #111; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
         .btn:hover { transform: translateY(-2px); opacity: 0.9; }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
@@ -75,7 +66,7 @@
         .btn-success { background: #48BB78; color: white; }
         .btn-small { padding: 8px; font-size: 12px; width: auto; margin: 2px; }
 
-        /* ELEMENTOS DEL CLIENTE */
+        /* VISTA CLIENTE */
         .premio-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .countdown { background: var(--primary); color: #111; padding: 8px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px; font-size: 14px; }
         
@@ -98,9 +89,10 @@
         .num.vendido-admin { background: var(--vend-bg); color: var(--vend-txt); text-decoration: line-through; opacity: 0.7; }
 
         /* MENÚ DE RIFAS CLIENTE */
-        .rifa-client-item { background: var(--disp-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; cursor: pointer; transition: transform 0.2s; }
+        .rifa-client-item { background: var(--disp-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 12px; margin-bottom: 15px; text-align: center; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center;}
         .rifa-client-item:hover { transform: scale(1.02); background: var(--primary); color: #111; }
-        .rifa-client-item h3 { margin: 0 0 5px 0; }
+        .rifa-client-item h3 { margin: 0 0 5px 0; font-size: 18px;}
+        .img-catalogo { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);}
 
         /* CARRITO FLOTANTE */
         .carrito-bar { position: fixed; bottom: -100px; left: 0; width: 100%; background: var(--card-bg); padding: 15px 20px; box-shadow: 0 -10px 20px rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; transition: bottom 0.3s; z-index: 1000; border-radius: 20px 20px 0 0; border-top: 2px solid var(--primary); }
@@ -126,7 +118,6 @@
         .ticket-receipt::before, .ticket-receipt::after { content: ''; position: absolute; left: 0; right: 0; height: 10px; background-size: 20px 20px; }
         .ticket-receipt::before { top: -5px; background-image: radial-gradient(circle at 10px 0, transparent 10px, #ffffff 11px); }
         .ticket-receipt::after { bottom: -5px; background-image: radial-gradient(circle at 10px 10px, transparent 10px, #ffffff 11px); }
-        
         .ticket-receipt h3 { text-align: center; margin: 0 0 10px 0; border-bottom: 2px dashed #000; padding-bottom: 10px; font-size: 18px; text-transform: uppercase;}
         .ticket-receipt p { margin: 5px 0; font-size: 13px; line-height: 1.4; display: flex; justify-content: space-between;}
         .ticket-receipt .ticket-nums { font-size: 20px; font-weight: bold; text-align: center; margin: 15px 0; padding: 15px 10px; border: 2px solid #000; border-radius: 5px; word-break: break-word; background: #f9f9f9;}
@@ -164,7 +155,7 @@
     <div id="contenedorAnimaciones"></div>
 
     <header class="header">
-        <img id="logoApp" src="https://via.placeholder.com/150" alt="Logo" class="logo-img">
+        <img id="logoApp" src="https://via.placeholder.com/150?text=Logo" alt="Logo" class="logo-img">
         <div class="header-text">
             <h1 class="header-title" id="tituloAppVisual">Sistema de Rifas</h1>
             <p class="header-desc" id="descApp">Participa y gana seguro</p>
@@ -175,12 +166,15 @@
     <div id="vistaCliente" class="container">
         
         <div id="menuRifasCliente" style="display: none;">
-            <h2 style="text-align: center; margin-bottom: 20px;">Sorteos Disponibles</h2>
+            <h2 style="text-align: center; margin-bottom: 20px;">Seleccione el sorteo de su preferencia 👇</h2>
             <div id="listaRifasDisponibles">
                 </div>
         </div>
 
         <div id="contenidoRifaActiva">
+            
+            <button id="btnVolverCatalogo" class="btn btn-outline" style="display:none; margin-bottom:15px; font-size: 14px; padding: 10px;" onclick="window.location.href=window.location.href.split('?')[0]">🔙 Volver a todos los sorteos</button>
+
             <div id="bannerGanador" class="banner-ganador" style="display: none;">
                 <h2 style="margin:0 0 5px 0;">🎉 ¡SORTEO FINALIZADO! 🎉</h2>
                 <p style="margin:0; font-size:14px;">El número ganador es el <strong id="boletoGanadorVisual" style="font-size:24px;"></strong></p>
@@ -220,11 +214,11 @@
             
             <div class="admin-nav" id="menuGlobalAdmin">
                 <button class="active" onclick="cambiarTabGlobal('misrifas')" id="tabBtnMisrifas">Mis Rifas</button>
-                <button onclick="cambiarTabGlobal('notificaciones')" id="tabBtnNotificaciones">Alertas Globales</button>
+                <button onclick="cambiarTabGlobal('notificaciones')" id="tabBtnNotificaciones">Config. Universal</button>
             </div>
 
             <div class="admin-nav" id="menuEdicionRifa" style="display: none;">
-                <button class="active" onclick="cambiarTabRifa('gral')" id="tabBtnGral">General</button>
+                <button class="active" onclick="cambiarTabRifa('gral')" id="tabBtnGral">Datos</button>
                 <button onclick="cambiarTabRifa('manual')" id="tabBtnManual">Ventas</button>
                 <button onclick="cambiarTabRifa('diseno')" id="tabBtnDiseno">Diseño</button>
                 <button onclick="cambiarTabRifa('lista')" id="tabBtnLista">Pagos/Ganador</button>
@@ -232,6 +226,14 @@
 
             <div id="tab-misrifas" class="admin-tab active">
                 <button class="btn btn-success" onclick="abrirModalCrearRifa()">+ Crear Nueva Rifa</button>
+                
+                <div style="background: var(--disp-bg); padding:15px; border-radius:10px; margin-top:15px; text-align:center;">
+                    <h3 style="margin-top:0;">🔗 Catálogo Principal</h3>
+                    <p style="font-size:11px;">Comparte este enlace para que tus clientes vean TODAS las rifas activas:</p>
+                    <input type="text" id="linkCatalogoPrincipal" readonly style="text-align:center; margin-bottom:5px;">
+                    <button class="btn btn-outline btn-small" onclick="copiarCatalogo()">📋 Copiar Link</button>
+                </div>
+
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
                 <h3 style="margin-bottom: 10px;">Rifas Activas</h3>
                 <div id="listaMisRifas"></div>
@@ -240,9 +242,15 @@
             </div>
 
             <div id="tab-notificaciones" class="admin-tab">
-                <h3>Configuración Universal de Mensajes</h3>
-                <p style="font-size: 11px;">Estos datos se usarán para TODAS las rifas creadas en este sistema.</p>
+                <h3>Configuración Universal</h3>
+                <p style="font-size: 11px;">Aplica para todas las rifas y el catálogo principal.</p>
                 
+                <label>Logo Principal (Sube tu logo para todo el sistema):</label>
+                <input type="file" id="uploadGlobalLogo" accept="image/*" onchange="subirImagenGlobal(event)">
+
+                <label>Contraseña de Administrador:</label>
+                <input type="text" id="globalAdminPass" placeholder="Ej: admin123">
+
                 <label>Tu Número de WhatsApp (Recibir comprobantes):</label>
                 <input type="text" id="globalNumWa" placeholder="Ej: 50760000000">
                 
@@ -252,28 +260,22 @@
                 <label>Telegram Chat ID (Opcional):</label>
                 <input type="text" id="globalTgChat" placeholder="Ej: -100123456789">
                 
-                <button class="btn" onclick="guardarConfigGlobal()">Guardar Datos Globales</button>
+                <button class="btn" onclick="guardarConfigGlobal()">Guardar Globales</button>
             </div>
 
             <div id="tab-gral" class="admin-tab">
-                <h3>Datos de la Rifa</h3>
                 <label>Nombre de la Rifa:</label>
                 <input type="text" id="inputNombreApp" onkeyup="actualizarTexto('tituloAppVisual', this.value)">
-                
                 <label>Cantidad de Números a Vender:</label>
                 <input type="number" id="inputTotalNumeros" min="1" max="1000">
-                
                 <label>Precio por Boleto ($):</label>
                 <input type="number" id="inputPrecio" onkeyup="actualizarPrecio()">
-                
                 <label>Fecha y Hora del Sorteo:</label>
                 <input type="datetime-local" id="inputFecha" onchange="iniciarTemporizador()">
-
                 <button class="btn btn-success" onclick="guardarConfigRifa()">Guardar Configuración de Rifa</button>
             </div>
 
             <div id="tab-manual" class="admin-tab">
-                <h3>Venta Directa</h3>
                 <div style="background: var(--disp-bg); padding: 10px; border-radius: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <span>Seleccionados: <strong id="adminCantSel">0</strong></span>
                     <button class="btn btn-success btn-small" style="margin:0;" onclick="abrirModalManualConfirm()">Registrar Venta</button>
@@ -287,8 +289,6 @@
             </div>
 
             <div id="tab-diseno" class="admin-tab">
-                <label>Logo de la Rifa (Subir):</label>
-                <input type="file" id="uploadLogoInput" accept="image/*" onchange="subirImagenFirebase(event, 'logoApp', 'logoUrl')">
                 <label>Foto del Premio (Subir):</label>
                 <input type="file" id="uploadPremioInput" accept="image/*" onchange="subirImagenFirebase(event, 'imgPremio', 'premioUrl')">
                 <label>Plantilla Visual:</label>
@@ -309,7 +309,7 @@
                     <option value="aqua">Agua Marina</option>
                     <option value="solar">Solar / Amarillo</option>
                 </select>
-                <label>Personalizar Color Principal:</label>
+                <label>Color Principal:</label>
                 <input type="color" id="colorPicker" onchange="cambiarColorMain()">
 
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
@@ -333,20 +333,18 @@
                     <option value="0">Al Fondo</option>
                     <option value="9999">Al Frente</option>
                 </select>
-                <button class="btn" onclick="guardarConfigRifa()">Guardar Diseño de Rifa</button>
+                <button class="btn" onclick="guardarConfigRifa()">Guardar Diseño</button>
             </div>
 
             <div id="tab-lista" class="admin-tab">
-                
                 <h3>Anunciar Ganador</h3>
                 <div style="background: var(--disp-bg); padding:15px; border-radius:10px; margin-bottom: 15px;">
-                    <label>Número ganador del sorteo:</label>
+                    <label>Número ganador:</label>
                     <div style="display: flex; gap:10px;">
                         <input type="number" id="inputNumGanador" placeholder="Ej. 15" style="margin:0;">
                         <button class="btn btn-success" style="margin:0; width:auto;" onclick="anunciarGanador()">Publicar</button>
                     </div>
                 </div>
-
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
                 <h3>Lista de Pagos</h3>
                 <table id="tablaParticipantes">
@@ -373,7 +371,7 @@
     <div id="modalLogin" class="modal">
         <div class="modal-content" style="text-align: center;">
             <h2>Acceso Administrador</h2>
-            <input type="password" id="adminPass" placeholder="Clave: admin123">
+            <input type="password" id="adminPass" placeholder="Clave">
             <button class="btn" onclick="verificarLogin()">Entrar</button>
             <button class="btn btn-danger" onclick="cerrarModales()">Cancelar</button>
         </div>
@@ -387,7 +385,7 @@
             <input type="tel" id="clienteTelefono" placeholder="Teléfono / WhatsApp" required>
             <select id="clienteMetodo">
                 <option value="Yappy">Yappy</option>
-                <option value="Transferencia">Transferencia Bancaria</option>
+                <option value="Transferencia Bancaria">Transferencia Bancaria</option>
                 <option value="Efectivo">Efectivo</option>
                 <option value="Tarjeta">Tarjeta</option>
                 <option value="Otros">Otros</option>
@@ -413,16 +411,12 @@
             <h2 style="text-align: center;">Editar Boleto</h2>
             <p style="text-align: center; color: var(--primary);">Boleto Actual: <strong id="editBoletoNum"></strong></p>
             <input type="hidden" id="editBoletoNumHidden">
-            
             <label style="font-size: 12px; font-weight: bold;">Mover a otro número (Opcional):</label>
             <input type="number" id="editNuevoNum" placeholder="Nuevo número" style="border: 2px solid var(--primary);">
-            
             <label style="font-size: 12px; font-weight: bold;">Nombre del Cliente:</label>
             <input type="text" id="editNombre" required>
-            
             <label style="font-size: 12px; font-weight: bold;">Teléfono del Cliente:</label>
             <input type="tel" id="editTelefono">
-            
             <button class="btn btn-success" onclick="guardarEdicionBoleto()">Guardar Cambios</button>
             <button class="btn btn-danger" onclick="cerrarModales()">Cancelar</button>
         </div>
@@ -448,25 +442,19 @@
         <div class="modal-content" style="background:#fff;">
             <div class="ticket-receipt">
                 <h3>🎟️ COMPROBANTE DE RESERVA</h3>
-                
                 <p><span>Fecha:</span> <strong id="ticketFecha"></strong></p>
                 <p><span>Transacción ID:</span> <strong id="ticketTxID"></strong></p>
                 <p><span>Rifa:</span> <strong id="ticketRifaNombre"></strong></p>
-                
                 <hr style="border-top: 1px dashed #000; margin: 10px 0;">
-                
                 <p><span>Cliente:</span> <strong id="ticketNombre"></strong></p>
                 <p><span>Método de Pago:</span> <strong id="ticketPago"></strong></p>
-                
                 <p style="text-align: center; margin-top: 15px;"><strong>Boletos Seleccionados:</strong></p>
                 <div class="ticket-nums" id="ticketNumeros"></div>
-                
                 <p><span>Precio por boleto:</span> <strong>$<span id="ticketPrecioUnitario"></span></strong></p>
                 <p class="total-row"><span>TOTAL A PAGAR:</span> <strong>$<span id="ticketMontoTotal"></span></strong></p>
-                
                 <div class="ticket-footer">
                     <strong>IMPORTANTE:</strong><br>
-                    Su reserva estará en estado de "Revisión" hasta que el administrador verifique el pago en la cuenta bancaria o cartera digital seleccionada. Una vez verificado, sus números pasarán a estado oficial (Pagado). Por favor envíe la captura de pantalla de este comprobante y su pago al WhatsApp del organizador. ¡Mucha suerte!
+                    Su reserva estará en estado de "Revisión" hasta que el administrador verifique el pago. Conserve su captura de pantalla y envíela al WhatsApp. ¡Mucha suerte!
                 </div>
             </div>
             <button class="btn btn-success" onclick="finalizarCompra()">Enviar Captura a WhatsApp</button>
@@ -474,7 +462,6 @@
     </div>
 
     <div id="printArea"></div>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -501,7 +488,7 @@
         let listaRifasMaster = {};
         let configActiva = {};
         let dbActiva = {};
-        let configGlobal = {}; 
+        let configGlobal = { wa: '', tgToken: '', tgChat: '', adminPass: 'admin123', logoUrl: '' }; 
         
         let numerosSeleccionados = [];
         let adminSeleccionados = [];
@@ -511,7 +498,7 @@
         let rifaActivaId = urlParams.get('rifa'); 
         let isClientView = urlParams.get('admin') !== 'true';
 
-        // Ocultar botón de configuración al cliente (Protección)
+        // Ocultar botón de configuración al cliente
         if(rifaActivaId && isClientView) {
             let btnAdmin = document.getElementById('btnEngranaje');
             if(btnAdmin) btnAdmin.style.display = 'none';
@@ -520,27 +507,35 @@
         // ================= ARRANQUE Y CARGA DE DATOS =================
         async function initAppGlobal() {
             try {
-                // Cargar datos globales y lista maestra desde Firestore
+                // Cargar Configuración Universal (Contraseña, Logo Global, etc)
                 const docGlobal = await getDoc(doc(db, "CronoRifas_System", "GlobalSettings"));
                 if(docGlobal.exists()) configGlobal = docGlobal.data();
-                else configGlobal = { wa: '', tgToken: '', tgChat: '' };
-
+                
+                // Cargar Lista de Rifas
                 const docSnap = await getDoc(doc(db, "CronoRifas_System", "MasterList"));
                 if (docSnap.exists()) listaRifasMaster = docSnap.data();
-                else listaRifasMaster = {};
                 
                 usaFirebase = true;
             } catch (error) {
-                console.warn("Error Firebase (¿Reglas bloqueadas?). Usando Modo Local Temporal", error);
+                console.warn("Usando Modo Local Temporal (Revisa Reglas de Firebase)", error);
                 usaFirebase = false;
                 listaRifasMaster = JSON.parse(localStorage.getItem('local_master')) || {};
-                configGlobal = JSON.parse(localStorage.getItem('local_global')) || { wa: '', tgToken: '', tgChat: '' };
+                let localG = JSON.parse(localStorage.getItem('local_global'));
+                if(localG) configGlobal = localG;
             }
 
             // Llenar inputs globales en el panel de admin
             document.getElementById('globalNumWa').value = configGlobal.wa || '';
             document.getElementById('globalTgToken').value = configGlobal.tgToken || '';
             document.getElementById('globalTgChat').value = configGlobal.tgChat || '';
+            document.getElementById('globalAdminPass').value = configGlobal.adminPass || 'admin123';
+
+            // Aplicar Logo Global si existe (para que no salga roto)
+            if(configGlobal.logoUrl) {
+                document.getElementById('logoApp').src = configGlobal.logoUrl;
+            } else {
+                document.getElementById('logoApp').src = "https://via.placeholder.com/150?text=Logo";
+            }
 
             if(rifaActivaId && listaRifasMaster[rifaActivaId]) {
                 configActiva = listaRifasMaster[rifaActivaId];
@@ -562,11 +557,11 @@
                     window.renderCuadriculaCliente();
                 }
             } else if (!rifaActivaId) {
-                // Generar Menú Principal de Rifas para el cliente si entra al link base
+                // Si no hay ID, mostrar el catálogo
                 generarMenuInicioCliente();
             } else {
                 document.getElementById('tituloAppVisual').innerText = "Rifa no encontrada";
-                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>La rifa solicitada no existe o fue eliminada.</p>";
+                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>La rifa solicitada no existe.</p>";
                 document.getElementById('precioBoleto').innerText = "";
             }
             window.generarAnimaciones();
@@ -581,10 +576,12 @@
                 
                 for(let id in listaRifasMaster) {
                     let r = listaRifasMaster[id];
+                    let imgHtml = r.premioUrl ? `<img src="${r.premioUrl}" class="img-catalogo">` : '';
                     cont.innerHTML += `
                         <div class="rifa-client-item" onclick="window.location.href='?rifa=${id}'">
                             <h3>🎟️ ${r.nombreApp || id}</h3>
                             <p style="font-size: 12px; margin:0;">${r.totalNumeros} Boletos disponibles | Precio: $${r.precio}</p>
+                            ${imgHtml}
                         </div>
                     `;
                 }
@@ -610,11 +607,13 @@
             configGlobal = {
                 wa: document.getElementById('globalNumWa').value,
                 tgToken: document.getElementById('globalTgToken').value,
-                tgChat: document.getElementById('globalTgChat').value
+                tgChat: document.getElementById('globalTgChat').value,
+                adminPass: document.getElementById('globalAdminPass').value || 'admin123',
+                logoUrl: configGlobal.logoUrl || ''
             };
             if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal); } catch(e){} }
             localStorage.setItem('local_global', JSON.stringify(configGlobal));
-            alert("Configuración Universal Guardada");
+            alert("Configuración Universal y Contraseña Guardadas");
         };
 
         // ================= GESTOR CENTRAL DE RIFAS =================
@@ -626,6 +625,10 @@
 
         window.renderListaMisRifas = function() {
             const cont = document.getElementById('listaMisRifas'); cont.innerHTML = '';
+            
+            const baseUrl = window.location.href.split('?')[0];
+            document.getElementById('linkCatalogoPrincipal').value = baseUrl;
+
             if(Object.keys(listaRifasMaster).length === 0) return cont.innerHTML = '<p style="color:gray;">No tienes rifas creadas. Crea una nueva arriba.</p>';
 
             for(let id in listaRifasMaster) {
@@ -644,13 +647,20 @@
             }
         };
 
+        window.copiarCatalogo = function() {
+            let input = document.getElementById('linkCatalogoPrincipal');
+            input.select();
+            document.execCommand("copy");
+            alert("Link del catálogo copiado al portapapeles.");
+        };
+
         window.ejecutarCrearRifa = async function() {
             let id = document.getElementById('nuevaRifaID').value.replace(/\s+/g, '');
             let nom = document.getElementById('nuevaRifaNombre').value;
             if(!id || !nom) return alert("Por favor completa los campos.");
             if(listaRifasMaster[id]) return alert("Ese ID ya existe. Elige otro.");
             
-            listaRifasMaster[id] = { nombreApp: nom, totalNumeros: 100, precio: 5, tema: 'gold' };
+            listaRifasMaster[id] = { nombreApp: nom, totalNumeros: 100, precio: 5, tema: 'gold', premioUrl: '' };
             await sincronizarMaster();
             window.location.href = `${window.location.href.split('?')[0]}?rifa=${id}&admin=true`;
         };
@@ -692,6 +702,7 @@
             
             document.getElementById('menuGlobalAdmin').style.display = 'none';
             document.getElementById('menuEdicionRifa').style.display = 'flex';
+            document.getElementById('btnVolverMisRifas').style.display = 'block';
             
             document.getElementById('inputNombreApp').value = configActiva.nombreApp || '';
             document.getElementById('inputTotalNumeros').value = configActiva.totalNumeros || 100;
@@ -699,7 +710,10 @@
             document.getElementById('inputFecha').value = configActiva.fecha || '';
             document.getElementById('temaSelect').value = configActiva.tema || 'gold';
             
+            // Prioridad de Logo: 1. Especifico de Rifa, 2. Global, 3. Placeholder
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
+            else if(configGlobal.logoUrl) document.getElementById('logoApp').src = configGlobal.logoUrl;
+
             if(configActiva.premioUrl) document.getElementById('imgPremio').src = configActiva.premioUrl;
             
             document.getElementById('adminRifaActualTitulo').innerText = `Administrando: ${configActiva.nombreApp}`;
@@ -711,6 +725,7 @@
 
         window.cerrarEdicionRifa = function() {
             document.getElementById('menuEdicionRifa').style.display = 'none';
+            document.getElementById('btnVolverMisRifas').style.display = 'none';
             document.getElementById('menuGlobalAdmin').style.display = 'flex';
             document.getElementById('adminRifaActualTitulo').innerText = '';
             window.cambiarTabGlobal('misrifas');
@@ -725,7 +740,7 @@
 
             listaRifasMaster[rifaActivaId] = configActiva; 
             await sincronizarMaster(); 
-            alert("¡Configuración guardada!");
+            alert("¡Configuración de Rifa Guardada!");
             window.aplicarConfiguracionVisual(); 
             window.renderCuadriculaAdmin();
         };
@@ -740,24 +755,32 @@
 
             listaRifasMaster[rifaActivaId] = configActiva;
             await sincronizarMaster();
-            alert("Ganador publicado en la pantalla de los clientes.");
+            alert("Ganador publicado en la pantalla del cliente.");
             window.aplicarConfiguracionVisual();
         };
 
         window.aplicarConfiguracionVisual = function() {
-            document.getElementById('tituloAppVisual').innerText = configActiva.nombreApp || "Crono Rifas";
+            document.getElementById('tituloAppVisual').innerText = configActiva.nombreApp || "Sistema de Rifas";
             document.getElementById('precioBoleto').innerHTML = `$${configActiva.precio || 5} <span style="font-size: 12px; color: gray;">x Boleto</span>`;
             document.documentElement.setAttribute('data-theme', configActiva.tema || 'gold');
-            if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
-            if(configActiva.premioUrl) document.getElementById('imgPremio').src = configActiva.premioUrl;
             
-            if(configActiva.ganador) {
+            // Revertir a global o default si no hay imagen configurada para evitar cuadrados rotos
+            if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
+            else if(configGlobal.logoUrl) document.getElementById('logoApp').src = configGlobal.logoUrl;
+            else document.getElementById('logoApp').src = "https://via.placeholder.com/150?text=Logo";
+            
+            document.getElementById('imgPremio').src = configActiva.premioUrl || "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80";
+            
+            // Banner Ganador
+            if(configActiva.ganador !== undefined && configActiva.ganador !== null && configActiva.ganador !== "") {
                 document.getElementById('bannerGanador').style.display = 'block';
                 document.getElementById('boletoGanadorVisual').innerText = configActiva.ganador;
                 document.getElementById('nombreGanadorVisual').innerText = configActiva.ganadorNombre;
             } else {
                 document.getElementById('bannerGanador').style.display = 'none';
             }
+
+            if(isClientView && rifaActivaId) document.getElementById('btnVolverCatalogo').style.display = 'inline-block';
             window.iniciarTemporizador();
         };
 
@@ -877,7 +900,7 @@
             }).catch(e => console.log(e));
         };
 
-        // ================= PANEL ADMINISTRADOR Y EDICIÓN (Cambio de Número) =================
+        // ================= PANEL ADMINISTRADOR Y EDICIÓN =================
         window.actualizarListaAdmin = function() {
             const tbody = document.querySelector('#tablaParticipantes tbody'); tbody.innerHTML = '';
             for(let num in dbActiva) {
@@ -912,7 +935,6 @@
             let nom = document.getElementById('editNombre').value; 
             let tel = document.getElementById('editTelefono').value;
             
-            // Lógica si el admin quiere cambiarle el número al cliente
             if(numNuevo && numNuevo !== numViejo) {
                 if(dbActiva[numNuevo]) return alert("Ese número ya está ocupado por otra persona.");
                 if(parseInt(numNuevo) >= (configActiva.totalNumeros || 100)) return alert("El número supera el total de la rifa.");
@@ -931,18 +953,46 @@
             window.renderCuadriculaAdmin();
         };
 
-        // ================= IMPRESIÓN (RAWBT y PDF CARTA) =================
+        // ================= IMPRESIÓN (RAWBT TEXTO LARGO y PDF CARTA) =================
         window.imprimirRawBT = function(num) {
             let c = dbActiva[num];
-            if(confirm(`¿Imprimir ticket para ${c.nombre} (Boleto #${num}) en RawBT?`)) {
-                let txt = `   *** TICKET DE RIFA *** \n\nRifa: ${configActiva.nombreApp}\nCliente: ${c.nombre}\nTelefono: ${c.telefono || 'N/A'}\n--------------------------------\nBOLETO #: ${num}\nESTADO: ${c.estado.toUpperCase()}\n--------------------------------\n¡Gracias por participar!\n\n\n`;
+            if(confirm(`¿Imprimir ticket largo para ${c.nombre} (Boleto #${num}) en RawBT?`)) {
+                const fechaActual = new Date();
+                const fechaStr = fechaActual.toLocaleDateString() + " " + fechaActual.toLocaleTimeString();
+                const txID = "TX-" + Math.floor(Math.random() * 1000000);
+                
+                let txt = `================================\n`;
+                txt += `      COMPROBANTE DE RESERVA\n`;
+                txt += `================================\n\n`;
+                txt += `SORTEO: ${configActiva.nombreApp}\n`;
+                txt += `FECHA: ${fechaStr}\n`;
+                txt += `TRANSACCION: ${txID}\n\n`;
+                txt += `--------------------------------\n`;
+                txt += `DATOS DEL CLIENTE\n`;
+                txt += `Nombre: ${c.nombre}\n`;
+                txt += `Telefono: ${c.telefono || 'N/A'}\n`;
+                txt += `--------------------------------\n\n`;
+                txt += `BOLETO ASIGNADO: #${num}\n`;
+                txt += `ESTADO: ${c.estado.toUpperCase()}\n`;
+                txt += `PRECIO UNITARIO: $${parseFloat(configActiva.precio || 5).toFixed(2)}\n\n`;
+                txt += `--------------------------------\n`;
+                txt += `TOTAL A PAGAR: $${parseFloat(configActiva.precio || 5).toFixed(2)}\n`;
+                txt += `--------------------------------\n\n`;
+                txt += `TERMINOS Y CONDICIONES:\n`;
+                txt += `Este boleto es su comprobante\n`;
+                txt += `oficial de participacion.\n`;
+                txt += `Sujeto a verificacion de pago.\n`;
+                txt += `El premio debe ser reclamado\n`;
+                txt += `con su identificacion oficial.\n`;
+                txt += `\n!MUCHA SUERTE!\n`;
+                txt += `================================\n\n\n`;
+
                 window.location.href = `intent:${encodeURI(txt)}#Intent;scheme=rawbt;package=ru.a402d.rawbtprinter;end;`;
             }
         };
 
         window.generarPDFRifa = function(id) {
             let configPDF = listaRifasMaster[id]; 
-            // Para asegurar, jalamos la DB de storage si es la actual, si no avisamos.
             let dbPDF = (id === rifaActivaId) ? dbActiva : (JSON.parse(localStorage.getItem('local_db_' + id)) || {}); 
             
             let html = `
@@ -995,15 +1045,28 @@
         };
 
         // ================= SUBIDA DE IMÁGENES =================
+        window.subirImagenGlobal = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader(); reader.onload = e => { document.getElementById('logoApp').src = e.target.result; configGlobal.logoUrl = e.target.result; }; reader.readAsDataURL(file);
+            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
+
+            const storageRef = ref(storage, `CronoRifas_System/Global/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(url => { configGlobal.logoUrl = url; alert("¡Logo Global en la nube!"); });
+            });
+        };
+
         window.subirImagenFirebase = function(event, imgElementId, configKey) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader(); reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; }; reader.readAsDataURL(file);
-            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo). Verifica tus Reglas en Firestore y Storage.");
+            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
 
             const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on('state_changed', null, err => alert("Error subiendo foto. Revisa reglas de Storage."), () => {
+            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
                 getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto en la nube!"); });
             });
         };
@@ -1012,20 +1075,20 @@
         window.mostrarLoginAdmin = () => document.getElementById('modalLogin').style.display = 'flex';
         
         window.verificarLogin = () => {
-            if(document.getElementById('adminPass').value === 'admin123') {
+            const passCorrecta = configGlobal.adminPass || 'admin123';
+            if(document.getElementById('adminPass').value === passCorrecta) {
                 window.cerrarModales(); 
                 document.getElementById('vistaCliente').style.display = 'none'; 
                 document.getElementById('vistaAdmin').style.display = 'block';
                 window.renderListaMisRifas(); 
                 
-                // Si estaba dentro de una rifa, asegurar que vayamos al panel global
                 document.getElementById('menuEdicionRifa').style.display = 'none';
                 document.getElementById('btnVolverMisRifas').style.display = 'none';
                 document.getElementById('menuGlobalAdmin').style.display = 'flex';
                 document.getElementById('adminRifaActualTitulo').innerText = '';
                 window.cambiarTabGlobal('misrifas');
 
-            } else alert("Clave errónea. Intenta con admin123");
+            } else alert("Clave errónea.");
         };
 
         window.cerrarPanelAdminYVerCliente = () => { 
@@ -1085,5 +1148,3 @@
         // INICIAR LA APP
         initAppGlobal();
     </script>
-</body>
-</html>
