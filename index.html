@@ -646,17 +646,16 @@
         import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
         // ========================================================
-        // TUS CREDENCIALES DE DISTRIBUIDORA OROCU INTEGRADAS
+        // TUS NUEVAS CREDENCIALES DE FIREBASE (PROYECTO: rifa-5e1ec)
         // ========================================================
         const firebaseConfig = {
-            apiKey: "AIzaSyBAHoMRYypy19p8r9AZdTM_hfF40jn-UaE",
-            authDomain: "distriorocu.firebaseapp.com",
-            databaseURL: "https://distriorocu-default-rtdb.firebaseio.com",
-            projectId: "distriorocu",
-            storageBucket: "distriorocu.firebasestorage.app",
-            messagingSenderId: "787619838349",
-            appId: "1:787619838349:web:0dfc2f515b087e6938a5c4",
-            measurementId: "G-60BB6XY56C"
+            apiKey: "AIzaSyAX_lifTRi_uVinpIBUh3NjH-4fH0YF8Mk",
+            authDomain: "rifa-5e1ec.firebaseapp.com",
+            projectId: "rifa-5e1ec",
+            storageBucket: "rifa-5e1ec.firebasestorage.app",
+            messagingSenderId: "882012719644",
+            appId: "1:882012719644:web:aad6d6170abf8b37c6add9",
+            measurementId: "G-PN5QPWGBQ4"
         };
         // ========================================================
 
@@ -1154,7 +1153,7 @@
                 document.getElementById('vistaCliente').style.display = 'none'; 
                 document.getElementById('vistaAdmin').style.display = 'block';
                 window.renderListaMisRifas(); 
-                window.cerrarEdicionRifa(); // Asegura que vayamos al panel maestro
+                window.cerrarEdicionRifa(); 
             } else alert("Clave errónea. Intenta con admin123");
         };
 
@@ -1215,5 +1214,3 @@
         // INICIAR LA APP
         initAppGlobal();
     </script>
-</body>
-</html>
