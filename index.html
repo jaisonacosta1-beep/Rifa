@@ -498,7 +498,7 @@
         let rifaActivaId = urlParams.get('rifa'); 
         let isClientView = urlParams.get('admin') !== 'true';
 
-        // Ocultar botón de configuración al cliente
+        // Ocultar botón de configuración al cliente (Protección)
         if(rifaActivaId && isClientView) {
             let btnAdmin = document.getElementById('btnEngranaje');
             if(btnAdmin) btnAdmin.style.display = 'none';
@@ -561,7 +561,7 @@
                 generarMenuInicioCliente();
             } else {
                 document.getElementById('tituloAppVisual').innerText = "Rifa no encontrada";
-                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>La rifa solicitada no existe.</p>";
+                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1; text-align:center;'>La rifa solicitada no existe o fue eliminada.</p>";
                 document.getElementById('precioBoleto').innerText = "";
             }
             window.generarAnimaciones();
@@ -613,7 +613,7 @@
             };
             if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal); } catch(e){} }
             localStorage.setItem('local_global', JSON.stringify(configGlobal));
-            alert("Configuración Universal y Contraseña Guardadas");
+            alert("Configuración Universal y Contraseña Guardadas correctamente.");
         };
 
         // ================= GESTOR CENTRAL DE RIFAS =================
@@ -662,6 +662,11 @@
             
             listaRifasMaster[id] = { nombreApp: nom, totalNumeros: 100, precio: 5, tema: 'gold', premioUrl: '' };
             await sincronizarMaster();
+            
+            // Cerrar modal y dar aviso
+            window.cerrarModales(); 
+            alert("✅ Rifa '" + nom + "' creada exitosamente.");
+            
             window.location.href = `${window.location.href.split('?')[0]}?rifa=${id}&admin=true`;
         };
 
@@ -740,7 +745,8 @@
 
             listaRifasMaster[rifaActivaId] = configActiva; 
             await sincronizarMaster(); 
-            alert("¡Configuración de Rifa Guardada!");
+            
+            alert("💾 Configuración de rifa guardada correctamente.");
             window.aplicarConfiguracionVisual(); 
             window.renderCuadriculaAdmin();
         };
@@ -755,7 +761,7 @@
 
             listaRifasMaster[rifaActivaId] = configActiva;
             await sincronizarMaster();
-            alert("Ganador publicado en la pantalla del cliente.");
+            alert("Ganador publicado en la pantalla de los clientes.");
             window.aplicarConfiguracionVisual();
         };
 
@@ -900,7 +906,7 @@
             }).catch(e => console.log(e));
         };
 
-        // ================= PANEL ADMINISTRADOR Y EDICIÓN =================
+        // ================= PANEL ADMINISTRADOR Y EDICIÓN (Cambio de Número) =================
         window.actualizarListaAdmin = function() {
             const tbody = document.querySelector('#tablaParticipantes tbody'); tbody.innerHTML = '';
             for(let num in dbActiva) {
@@ -935,6 +941,7 @@
             let nom = document.getElementById('editNombre').value; 
             let tel = document.getElementById('editTelefono').value;
             
+            // Lógica si el admin quiere cambiarle el número al cliente
             if(numNuevo && numNuevo !== numViejo) {
                 if(dbActiva[numNuevo]) return alert("Ese número ya está ocupado por otra persona.");
                 if(parseInt(numNuevo) >= (configActiva.totalNumeros || 100)) return alert("El número supera el total de la rifa.");
@@ -1148,3 +1155,5 @@
         // INICIAR LA APP
         initAppGlobal();
     </script>
+</body>
+</html>
