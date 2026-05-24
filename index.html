@@ -6,7 +6,7 @@
     <title>Sistema de Rifas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* MOTOR DE 15 TEMAS - DESCOMPRIMIDO PARA MEJOR LECTURA */
+        /* MOTOR DE 15 TEMAS - COMPLETO Y SIN RECORTES */
         :root {
             --bg-color: #111111; 
             --card-bg: #222222; 
@@ -95,7 +95,7 @@
             color: var(--text-main); 
             margin: 0; 
             padding: 0; 
-            padding-bottom: 90px; 
+            padding-bottom: 120px; 
             position: relative; 
             overflow-x: hidden; 
             transition: background 0.3s;
@@ -174,16 +174,8 @@
             background: var(--disp-bg); 
             color: var(--text-main); 
         }
-        input[type="color"] { 
-            padding: 2px; 
-            height: 40px; 
-            cursor: pointer;
-        }
-        input[type="file"] { 
-            padding: 10px; 
-            background: var(--disp-bg); 
-            border: 1px dashed var(--primary); 
-        }
+        input[type="color"] { padding: 2px; height: 40px; cursor: pointer; }
+        input[type="file"] { padding: 10px; background: var(--disp-bg); border: 1px dashed var(--primary); }
         
         /* BOTONES */
         .btn { 
@@ -199,15 +191,8 @@
             transition: 0.2s; 
             margin-bottom: 10px;
         }
-        .btn:hover { 
-            transform: translateY(-2px); 
-            opacity: 0.9;
-        }
-        .btn-outline { 
-            background: transparent; 
-            border: 2px solid var(--primary); 
-            color: var(--primary); 
-        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-danger { background: #E53E3E; color: white; }
         .btn-success { background: #48BB78; color: white; }
         .btn-small { padding: 8px; font-size: 12px; width: auto; margin: 2px; }
@@ -233,29 +218,27 @@
             font-size: 14px;
         }
         
-        /* LEYENDA Y CUADRÍCULA */
-        .leyenda { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            font-size: 11px; 
+        /* BANNER GANADOR */
+        .banner-ganador { 
+            background: linear-gradient(135deg, #FFD700, #F59E0B); 
+            color: #000; 
+            padding: 15px; 
+            border-radius: 12px; 
+            text-align: center; 
             font-weight: bold; 
             margin-bottom: 15px; 
-            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); 
+            animation: pulse 2s infinite; 
         }
-        .ley-item { display: flex; align-items: center; gap: 5px; }
-        .ley-color { 
-            width: 15px; 
-            height: 15px; 
-            border-radius: 4px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(5, 1fr); 
-            gap: 8px; 
-        }
+        /* LEYENDA */
+        .leyenda { display: flex; justify-content: center; gap: 15px; font-size: 11px; font-weight: bold; margin-bottom: 15px; flex-wrap: wrap; }
+        .ley-item { display: flex; align-items: center; gap: 5px; }
+        .ley-color { width: 15px; height: 15px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+
+        /* CUADRÍCULA */
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
         .num { 
             aspect-ratio: 1; 
             display: flex; 
@@ -270,20 +253,9 @@
         }
         .num.disponible { background: var(--disp-bg); color: var(--disp-txt); }
         .num.agarrado { background: var(--agarrado-bg); color: var(--agarrado-txt); cursor: not-allowed; }
-        .num.seleccionado { 
-            background: var(--seleccion-bg); 
-            color: white; 
-            transform: scale(1.1); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-            border: 2px solid white;
-        }
+        .num.seleccionado { background: var(--seleccion-bg); color: white; transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid white; }
         .num.reservado-admin { background: var(--res-bg); color: var(--res-txt); }
-        .num.vendido-admin { 
-            background: var(--vend-bg); 
-            color: var(--vend-txt); 
-            text-decoration: line-through; 
-            opacity: 0.7;
-        }
+        .num.vendido-admin { background: var(--vend-bg); color: var(--vend-txt); text-decoration: line-through; opacity: 0.7; }
 
         /* CARRITO FLOTANTE */
         .carrito-bar { 
@@ -327,51 +299,46 @@
             overflow-y: auto; 
         }
 
-        /* NAVEGACIÓN Y TABLAS ADMIN */
+        /* TICKET PROFESIONAL TIPO RECIBO */
+        .ticket-receipt { 
+            background: #ffffff; 
+            color: #000000; 
+            padding: 20px; 
+            border-radius: 8px; 
+            font-family: 'Courier New', Courier, monospace; 
+            margin-bottom: 20px; 
+            text-align: left; 
+            border: 1px solid #cccccc; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+        }
+        .ticket-receipt h3 { text-align: center; margin: 0 0 10px 0; border-bottom: 2px dashed #000; padding-bottom: 10px; font-size: 18px; }
+        .ticket-receipt p { margin: 5px 0; font-size: 14px; line-height: 1.4; }
+        .ticket-receipt .ticket-nums { font-size: 22px; font-weight: bold; text-align: center; margin: 15px 0; padding: 10px; border: 2px solid #000; border-radius: 5px; word-break: break-word; }
+        .ticket-receipt .ticket-footer { text-align: center; font-size: 11px; border-top: 2px dashed #000; padding-top: 10px; margin-top: 10px; }
+
+        /* TABLAS Y MENÚS DE ADMINISTRACIÓN */
         table { width: 100%; border-collapse: collapse; font-size: 12px; }
         th, td { padding: 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
         
-        .admin-nav { 
-            display: flex; 
-            gap: 5px; 
-            margin-bottom: 15px; 
-            overflow-x: auto; 
-            padding-bottom: 5px;
-        }
-        .admin-nav button { 
-            padding: 10px; 
-            border-radius: 8px; 
-            border: none; 
-            background: var(--disp-bg); 
-            cursor: pointer; 
-            font-weight: bold; 
-            color: var(--text-main); 
-            white-space: nowrap;
-        }
+        .admin-nav { display: flex; gap: 5px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .admin-nav button { padding: 10px; border-radius: 8px; border: none; background: var(--disp-bg); cursor: pointer; font-weight: bold; color: var(--text-main); white-space: nowrap; }
         .admin-nav button.active { background: var(--primary); color: #111; }
         .admin-tab { display: none; }
         .admin-tab.active { display: block; }
         
-        .checkbox-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px;}
-        .checkbox-grid label { display: flex; align-items: center; gap: 5px; font-size: 20px;}
+        .checkbox-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+        .checkbox-grid label { display: flex; align-items: center; gap: 5px; font-size: 20px; }
         
-        .rifa-item { 
-            background: var(--disp-bg); 
-            border: 1px solid var(--primary); 
-            padding: 15px; 
-            border-radius: 10px; 
-            margin-bottom: 15px; 
-            text-align: left;
-        }
-        .rifa-item h4 { margin: 0 0 10px 0; color: var(--primary);}
+        .rifa-item { background: var(--disp-bg); border: 1px solid var(--primary); padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
+        .rifa-item h4 { margin: 0 0 5px 0; color: var(--primary); font-size: 16px; }
 
-        /* ÁREA DE IMPRESIÓN (PDF TAMAÑO CARTA) */
+        /* ÁREA DE IMPRESIÓN (PDF) */
         @media screen { #printArea { display: none; } }
         @media print {
             body * { display: none !important; }
             #printArea, #printArea * { display: block !important; }
             #printArea { position: absolute; left: 0; top: 0; width: 100%; background: white; color: black; padding: 20px; }
-            .print-letter { width: 216mm; min-height: 279mm; margin: 0 auto; box-sizing: border-box; font-family: Arial, sans-serif;}
+            .print-letter { width: 216mm; min-height: 279mm; margin: 0 auto; box-sizing: border-box; font-family: Arial, sans-serif; }
         }
     </style>
 </head>
@@ -389,6 +356,13 @@
     </header>
 
     <div id="vistaCliente" class="container">
+        
+        <div id="bannerGanador" class="banner-ganador" style="display: none;">
+            <h2 style="margin:0 0 5px 0;">🎉 ¡SORTEO FINALIZADO! 🎉</h2>
+            <p style="margin:0; font-size:14px;">El número ganador es el <strong id="boletoGanadorVisual" style="font-size:24px;"></strong></p>
+            <p style="margin:5px 0 0 0;">¡Felicidades a <strong id="nombreGanadorVisual"></strong>!</p>
+        </div>
+
         <div class="card" style="text-align: center;">
             <div id="temporizador" class="countdown">Sorteo en: 00d 00h 00m 00s</div>
             <img id="imgPremio" src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" class="premio-img">
@@ -417,22 +391,43 @@
 
     <div id="vistaAdmin" class="container" style="display: none;">
         <div class="card">
-            <h2 style="text-align: center;">Panel de Control <span id="adminRifaActualTitulo" style="font-size: 12px; color: var(--primary); display: block;"></span></h2>
+            <h2 style="text-align: center;">Panel de Control <span id="adminRifaActualTitulo" style="font-size: 12px; color: var(--primary); display: block; margin-top:5px;"></span></h2>
             
-            <div class="admin-nav">
-                <button class="active" onclick="cambiarTab('misrifas')" id="tabBtnMisrifas">Mis Rifas</button>
-                <button onclick="cambiarTab('gral')" id="tabBtnGral">General</button>
-                <button onclick="cambiarTab('manual')" id="tabBtnManual">Venta Manual</button>
-                <button onclick="cambiarTab('diseno')" id="tabBtnDiseno">Diseño</button>
-                <button onclick="cambiarTab('lista')" id="tabBtnLista">Pagos</button>
+            <div class="admin-nav" id="menuGlobalAdmin">
+                <button class="active" onclick="cambiarTabGlobal('misrifas')" id="tabBtnMisrifas">Mis Rifas</button>
+                <button onclick="cambiarTabGlobal('notificaciones')" id="tabBtnNotificaciones">Alertas Globales</button>
+            </div>
+
+            <div class="admin-nav" id="menuEdicionRifa" style="display: none;">
+                <button class="active" onclick="cambiarTabRifa('gral')" id="tabBtnGral">General</button>
+                <button onclick="cambiarTabRifa('manual')" id="tabBtnManual">Ventas</button>
+                <button onclick="cambiarTabRifa('diseno')" id="tabBtnDiseno">Diseño</button>
+                <button onclick="cambiarTabRifa('lista')" id="tabBtnLista">Pagos/Ganador</button>
             </div>
 
             <div id="tab-misrifas" class="admin-tab active">
                 <button class="btn btn-success" onclick="abrirModalCrearRifa()">+ Crear Nueva Rifa</button>
-                <button class="btn btn-danger" onclick="borrarTodoElSistema()">🗑️ Borrar TODO el Sistema</button>
                 <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
                 <h3 style="margin-bottom: 10px;">Rifas Activas</h3>
                 <div id="listaMisRifas"></div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+                <button class="btn btn-danger" onclick="borrarTodoElSistema()">🗑️ Borrar TODO el Sistema</button>
+            </div>
+
+            <div id="tab-notificaciones" class="admin-tab">
+                <h3>Configuración Universal de Mensajes</h3>
+                <p style="font-size: 11px;">Estos datos se usarán para TODAS las rifas creadas en este sistema.</p>
+                
+                <label>Tu Número de WhatsApp (Recibir comprobantes):</label>
+                <input type="text" id="globalNumWa" placeholder="Ej: 50760000000">
+                
+                <label>Telegram Bot Token (Opcional):</label>
+                <input type="text" id="globalTgToken" placeholder="123456:ABC-DEF...">
+                
+                <label>Telegram Chat ID (Opcional):</label>
+                <input type="text" id="globalTgChat" placeholder="Ej: -100123456789">
+                
+                <button class="btn" onclick="guardarConfigGlobal()">Guardar Datos Globales</button>
             </div>
 
             <div id="tab-gral" class="admin-tab">
@@ -440,27 +435,16 @@
                 <label>Nombre de la Rifa:</label>
                 <input type="text" id="inputNombreApp" onkeyup="actualizarTexto('tituloAppVisual', this.value)">
                 
-                <label>Cantidad de Números (1 al 1000):</label>
+                <label>Cantidad de Números a Vender:</label>
                 <input type="number" id="inputTotalNumeros" min="1" max="1000">
                 
                 <label>Precio por Boleto ($):</label>
                 <input type="number" id="inputPrecio" onkeyup="actualizarPrecio()">
                 
-                <label>Fecha del Sorteo:</label>
+                <label>Fecha y Hora del Sorteo:</label>
                 <input type="datetime-local" id="inputFecha" onchange="iniciarTemporizador()">
 
-                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
-                <h3>Notificaciones (WhatsApp y Telegram)</h3>
-                <label>Tu Número de WhatsApp:</label>
-                <input type="text" id="inputNumWa" placeholder="Ej: 50760000000">
-                
-                <label>Telegram Bot Token:</label>
-                <input type="text" id="inputTgToken" placeholder="123456:ABC-DEF...">
-                
-                <label>Telegram Chat ID:</label>
-                <input type="text" id="inputTgChat" placeholder="Ej: -100123456789">
-                
-                <button class="btn" onclick="guardarConfigRifa()">Guardar Configuración en Nube</button>
+                <button class="btn btn-success" onclick="guardarConfigRifa()">Guardar Configuración de Rifa</button>
             </div>
 
             <div id="tab-manual" class="admin-tab">
@@ -478,15 +462,14 @@
             </div>
 
             <div id="tab-diseno" class="admin-tab">
-                <label>Logo de la Rifa (Subir a Firebase):</label>
+                <label>Logo de la Rifa (Subir):</label>
                 <input type="file" id="uploadLogoInput" accept="image/*" onchange="subirImagenFirebase(event, 'logoApp', 'logoUrl')">
-                
-                <label>Foto del Premio (Subir a Firebase):</label>
+                <label>Foto del Premio (Subir):</label>
                 <input type="file" id="uploadPremioInput" accept="image/*" onchange="subirImagenFirebase(event, 'imgPremio', 'premioUrl')">
                 
                 <label>Plantilla Visual:</label>
                 <select id="temaSelect" onchange="cambiarTema()">
-                    <option value="gold" selected>Dorado Premium</option>
+                    <option value="gold">Dorado Premium</option>
                     <option value="mint">Mint (Estilo Rifary)</option>
                     <option value="ocean">Océano</option>
                     <option value="dark">Oscuro Profesional</option>
@@ -502,7 +485,6 @@
                     <option value="aqua">Agua Marina</option>
                     <option value="solar">Solar / Amarillo</option>
                 </select>
-
                 <label>Personalizar Color Principal:</label>
                 <input type="color" id="colorPicker" onchange="cambiarColorMain()">
 
@@ -518,31 +500,39 @@
                     <label><input type="checkbox" value="💵"> 💵</label>
                     <label><input type="checkbox" value="🚗"> 🚗</label>
                 </div>
-                
-                <label>Cantidad:</label>
-                <input type="range" id="animCant" min="0" max="50" value="15" onchange="generarAnimaciones()">
-                <label>Tamaño:</label>
-                <input type="range" id="animSize" min="10" max="80" value="30" onchange="generarAnimaciones()">
-                <label>Velocidad:</label>
-                <input type="range" id="animSpeed" min="1" max="20" value="10" onchange="generarAnimaciones()">
-                <label>Transparencia:</label>
-                <input type="range" id="animOpacity" min="1" max="10" value="5" onchange="generarAnimaciones()">
-                <label>Posición en pantalla:</label>
+                <label>Cantidad:</label><input type="range" id="animCant" min="0" max="50" value="15" onchange="generarAnimaciones()">
+                <label>Tamaño:</label><input type="range" id="animSize" min="10" max="80" value="30" onchange="generarAnimaciones()">
+                <label>Velocidad:</label><input type="range" id="animSpeed" min="1" max="20" value="10" onchange="generarAnimaciones()">
+                <label>Transparencia:</label><input type="range" id="animOpacity" min="1" max="10" value="5" onchange="generarAnimaciones()">
+                <label>Posición:</label>
                 <select id="animZIndex" onchange="generarAnimaciones()">
                     <option value="0">Al Fondo</option>
                     <option value="9999">Al Frente</option>
                 </select>
-                <button class="btn" onclick="guardarConfigRifa()">Guardar Diseño en Firebase</button>
+                <button class="btn" onclick="guardarConfigRifa()">Guardar Diseño de Rifa</button>
             </div>
 
             <div id="tab-lista" class="admin-tab">
+                
+                <h3>Anunciar Ganador</h3>
+                <div style="background: var(--disp-bg); padding:15px; border-radius:10px; margin-bottom: 15px;">
+                    <label>Número ganador del sorteo:</label>
+                    <div style="display: flex; gap:10px;">
+                        <input type="number" id="inputNumGanador" placeholder="Ej. 15" style="margin:0;">
+                        <button class="btn btn-success" style="margin:0; width:auto;" onclick="anunciarGanador()">Publicar</button>
+                    </div>
+                </div>
+
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+                <h3>Lista de Pagos</h3>
                 <table id="tablaParticipantes">
                     <thead><tr><th>Boleto</th><th>Cliente</th><th>Acciones</th></tr></thead>
                     <tbody></tbody>
                 </table>
             </div>
 
-            <button class="btn btn-outline" style="margin-top: 20px;" onclick="cerrarPanelAdminYVerCliente()">Cerrar Administrador</button>
+            <button class="btn btn-outline" id="btnVolverMisRifas" style="margin-top: 20px; display:none;" onclick="cerrarEdicionRifa()">🔙 Volver a Mis Rifas</button>
+            <button class="btn btn-danger" style="margin-top: 10px;" onclick="cerrarPanelAdminYVerCliente()">Cerrar Administrador</button>
         </div>
     </div>
 
@@ -594,10 +584,19 @@
 
     <div id="modalEditarBoleto" class="modal">
         <div class="modal-content">
-            <h2 style="text-align: center;">Editar Boleto <span id="editBoletoNum"></span></h2>
+            <h2 style="text-align: center;">Editar Boleto</h2>
+            <p style="text-align: center; color: var(--primary);">Boleto Actual: <strong id="editBoletoNum"></strong></p>
             <input type="hidden" id="editBoletoNumHidden">
-            <input type="text" id="editNombre" placeholder="Nombre" required>
-            <input type="tel" id="editTelefono" placeholder="Teléfono">
+            
+            <label style="font-size: 12px; font-weight: bold;">Cambiar a otro número (Opcional):</label>
+            <input type="number" id="editNuevoNum" placeholder="Nuevo número" style="border: 2px solid var(--primary);">
+            
+            <label style="font-size: 12px; font-weight: bold;">Nombre del Cliente:</label>
+            <input type="text" id="editNombre" required>
+            
+            <label style="font-size: 12px; font-weight: bold;">Teléfono del Cliente:</label>
+            <input type="tel" id="editTelefono">
+            
             <button class="btn btn-success" onclick="guardarEdicionBoleto()">Guardar Cambios</button>
             <button class="btn btn-danger" onclick="cerrarModales()">Cancelar</button>
         </div>
@@ -620,56 +619,65 @@
     </div>
 
     <div id="modalTicket" class="modal">
-        <div class="modal-content" style="text-align:center;">
-            <div style="border: 2px dashed var(--primary); padding: 20px; border-radius: 15px; margin-bottom: 20px; background:#fff; color:#000;">
-                <h3 style="margin-top: 0;">🎟️ TICKET VIRTUAL</h3>
-                <p><strong id="ticketNombre"></strong></p>
-                <p style="font-size: 28px; font-weight: 800; color: var(--primary); word-break: break-all;" id="ticketNumeros"></p>
-                <p style="font-size: 11px;">¡Tómale captura a este ticket!</p>
+        <div class="modal-content" style="background:#fff;">
+            <div class="ticket-receipt">
+                <h3>COMPROBANTE DE PARTICIPACIÓN</h3>
+                <p><strong>Rifa:</strong> <span id="ticketRifaNombre"></span></p>
+                <p><strong>Cliente:</strong> <span id="ticketNombre"></span></p>
+                <p><strong>Método de Pago:</strong> <span id="ticketPago"></span></p>
+                
+                <div class="ticket-nums" id="ticketNumeros"></div>
+                
+                <p style="text-align: center; font-weight: bold; font-size: 16px;">Total a pagar: $<span id="ticketMontoTotal"></span></p>
+                
+                <div class="ticket-footer">
+                    * Este boleto está sujeto a verificación de pago antes de ser validado y marcado como oficial en el sistema. Conserve su captura de pantalla.
+                </div>
             </div>
             <button class="btn btn-success" onclick="finalizarCompra()">Enviar Captura a WhatsApp</button>
         </div>
     </div>
 
     <div id="printArea"></div>
+
     <script type="module">
-        // Importación de módulos de Firebase v10
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
         // ========================================================
-        // ⚠️ PEGA AQUÍ TUS CREDENCIALES DE DISTRIBUIDORA OROCU ⚠️
+        // TUS CREDENCIALES DE DISTRIBUIDORA OROCU INTEGRADAS
         // ========================================================
         const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "TU_AUTH_DOMAIN",
-            projectId: "TU_PROJECT_ID",
-            storageBucket: "TU_STORAGE_BUCKET",
-            messagingSenderId: "TU_MESSAGING_SENDER_ID",
-            appId: "TU_APP_ID"
+            apiKey: "AIzaSyBAHoMRYypy19p8r9AZdTM_hfF40jn-UaE",
+            authDomain: "distriorocu.firebaseapp.com",
+            databaseURL: "https://distriorocu-default-rtdb.firebaseio.com",
+            projectId: "distriorocu",
+            storageBucket: "distriorocu.firebasestorage.app",
+            messagingSenderId: "787619838349",
+            appId: "1:787619838349:web:0dfc2f515b087e6938a5c4",
+            measurementId: "G-60BB6XY56C"
         };
         // ========================================================
 
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        // Variables Globales
         let listaRifasMaster = {};
         let configActiva = {};
         let dbActiva = {};
+        let configGlobal = {}; 
+        
         let numerosSeleccionados = [];
         let adminSeleccionados = [];
-        let usaFirebase = true; // Bandera para saber si usamos la nube o modo local
+        let usaFirebase = true; 
 
-        // Detectar en qué rifa estamos
         const urlParams = new URLSearchParams(window.location.search);
         let rifaActivaId = urlParams.get('rifa'); 
         let isClientView = urlParams.get('admin') !== 'true';
 
-        // Ocultar botón de configuración al cliente (Protección de vista)
+        // Ocultar botón de configuración al cliente
         if(rifaActivaId && isClientView) {
             let btnAdmin = document.getElementById('btnEngranaje');
             if(btnAdmin) btnAdmin.style.display = 'none';
@@ -678,23 +686,29 @@
         // ================= ARRANQUE Y CARGA DE DATOS =================
         async function initAppGlobal() {
             try {
-                // Intentar conectar a Firebase
+                // Cargar datos globales y lista maestra
+                const docGlobal = await getDoc(doc(db, "CronoRifas_System", "GlobalSettings"));
+                if(docGlobal.exists()) configGlobal = docGlobal.data();
+                else configGlobal = { wa: '', tgToken: '', tgChat: '' };
+
                 const docSnap = await getDoc(doc(db, "CronoRifas_System", "MasterList"));
-                if (docSnap.exists()) {
-                    listaRifasMaster = docSnap.data();
-                } else {
-                    listaRifasMaster = {};
-                }
+                if (docSnap.exists()) listaRifasMaster = docSnap.data();
+                else listaRifasMaster = {};
+                
                 usaFirebase = true;
             } catch (error) {
-                // MODO LOCAL (ANTI-ERROR 1081): Si Firebase falla, usa memoria local
-                console.warn("Firebase no configurado correctamente. Usando Modo Local.", error);
+                console.warn("Error Firebase, usando Modo Local", error);
                 usaFirebase = false;
                 listaRifasMaster = JSON.parse(localStorage.getItem('local_master')) || {};
+                configGlobal = JSON.parse(localStorage.getItem('local_global')) || { wa: '', tgToken: '', tgChat: '' };
             }
 
+            // Llenar inputs globales en el panel
+            document.getElementById('globalNumWa').value = configGlobal.wa || '';
+            document.getElementById('globalTgToken').value = configGlobal.tgToken || '';
+            document.getElementById('globalTgChat').value = configGlobal.tgChat || '';
+
             if(rifaActivaId && listaRifasMaster[rifaActivaId]) {
-                // Cargar la Rifa específica
                 configActiva = listaRifasMaster[rifaActivaId];
                 
                 if (usaFirebase) {
@@ -707,67 +721,42 @@
                 window.aplicarConfiguracionVisual();
                 window.renderCuadriculaCliente();
                 
-                // Si es el administrador entrando con su link
                 if(!isClientView) {
                     document.getElementById('vistaCliente').style.display = 'none';
                     document.getElementById('vistaAdmin').style.display = 'block';
                     window.abrirModoEdicionRifa(rifaActivaId);
                 }
             } else if (!rifaActivaId) {
-                // Vista inicial sin rifa seleccionada
                 document.getElementById('tituloAppVisual').innerText = "Sistema de Rifas";
-                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1;'>Bienvenido. Inicia sesión en ⚙️ para administrar.</p>";
+                document.getElementById('cuadriculaCliente').innerHTML = "<p style='grid-column: 1 / -1;'>No hay rifa activa o no existe. Inicia sesión (⚙️) para crear una.</p>";
                 document.getElementById('precioBoleto').innerText = "";
             }
             window.generarAnimaciones();
         }
 
-        // ================= GUARDADO DE DATOS (NUBE / LOCAL) =================
+        // ================= SINCRONIZACIÓN =================
         async function sincronizarMaster() { 
-            if(usaFirebase) {
-                try { await setDoc(doc(db, "CronoRifas_System", "MasterList"), listaRifasMaster); } 
-                catch(e) { console.error("Error guardando en nube", e); }
-            }
+            if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "MasterList"), listaRifasMaster); } catch(e){} }
             localStorage.setItem('local_master', JSON.stringify(listaRifasMaster));
         }
         
         async function sincronizarDBRifa() { 
-            if(usaFirebase) {
-                try { await setDoc(doc(db, "CronoRifas_System", "DB_" + rifaActivaId), dbActiva); } 
-                catch(e) { console.error("Error guardando db en nube", e); }
-            }
+            if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "DB_" + rifaActivaId), dbActiva); } catch(e){} }
             localStorage.setItem('local_db_' + rifaActivaId, JSON.stringify(dbActiva));
         }
 
-        // ================= SUBIDA DE IMÁGENES =================
-        window.subirImagenFirebase = function(event, imgElementId, configKey) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Previsualización inmediata (Base64)
-            const reader = new FileReader(); 
-            reader.onload = e => {
-                document.getElementById(imgElementId).src = e.target.result;
-                configActiva[configKey] = e.target.result; // Guardar temporalmente en local
-            }; 
-            reader.readAsDataURL(file);
-
-            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase no conectado).");
-
-            // Subir a Firebase Storage
-            const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-
-            uploadTask.on('state_changed', null, err => alert("Error subiendo foto. Intenta de nuevo."), () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(url => { 
-                    configActiva[configKey] = url; 
-                    alert("¡Foto guardada en la nube exitosamente!"); 
-                });
-            });
+        window.guardarConfigGlobal = async function() {
+            configGlobal = {
+                wa: document.getElementById('globalNumWa').value,
+                tgToken: document.getElementById('globalTgToken').value,
+                tgChat: document.getElementById('globalTgChat').value
+            };
+            if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal); } catch(e){} }
+            localStorage.setItem('local_global', JSON.stringify(configGlobal));
+            alert("Configuración Universal Guardada");
         };
 
         // ================= GESTOR CENTRAL DE RIFAS =================
-        
         window.abrirModalCrearRifa = function() {
             document.getElementById('nuevaRifaID').value = '';
             document.getElementById('nuevaRifaNombre').value = '';
@@ -777,10 +766,7 @@
         window.renderListaMisRifas = function() {
             const cont = document.getElementById('listaMisRifas'); 
             cont.innerHTML = '';
-            
-            if(Object.keys(listaRifasMaster).length === 0) {
-                return cont.innerHTML = '<p style="color:gray;">No tienes rifas creadas. Crea una nueva arriba.</p>';
-            }
+            if(Object.keys(listaRifasMaster).length === 0) return cont.innerHTML = '<p style="color:gray;">No tienes rifas creadas. Crea una nueva arriba.</p>';
 
             for(let id in listaRifasMaster) {
                 let r = listaRifasMaster[id];
@@ -806,8 +792,6 @@
             
             listaRifasMaster[id] = { nombreApp: nom, totalNumeros: 100, precio: 5, tema: 'gold' };
             await sincronizarMaster();
-            
-            // Recargar e ir directo a la nueva rifa
             window.location.href = `${window.location.href.split('?')[0]}?rifa=${id}&admin=true`;
         };
 
@@ -827,9 +811,7 @@
 
         window.borrarRifaEspecifica = async function(id) {
             if(confirm(`¿Deseas borrar permanentemente la rifa: ${id}?`)) {
-                if(usaFirebase) {
-                    try { await deleteDoc(doc(db, "CronoRifas_System", "DB_" + id)); } catch(e){}
-                }
+                if(usaFirebase) { try { await deleteDoc(doc(db, "CronoRifas_System", "DB_" + id)); } catch(e){} }
                 localStorage.removeItem('local_db_' + id);
                 delete listaRifasMaster[id];
                 await sincronizarMaster(); 
@@ -837,7 +819,7 @@
             }
         };
 
-        // ================= EDICIÓN DE RIFA =================
+        // ================= EDICIÓN DE RIFA Y GANADOR =================
         window.abrirModoEdicionRifa = async function(id) {
             rifaActivaId = id; 
             configActiva = listaRifasMaster[id];
@@ -845,41 +827,42 @@
             if(usaFirebase) {
                 const dbSnap = await getDoc(doc(db, "CronoRifas_System", "DB_" + id)); 
                 dbActiva = dbSnap.exists() ? dbSnap.data() : {};
-            } else {
-                dbActiva = JSON.parse(localStorage.getItem('local_db_' + id)) || {};
-            }
+            } else { dbActiva = JSON.parse(localStorage.getItem('local_db_' + id)) || {}; }
             
-            // Mostrar pestañas del panel admin
-            ['Gral', 'Manual', 'Diseno', 'Lista'].forEach(t => document.getElementById('tabBtn'+t).style.display = 'block');
+            // Ajustar menús
+            document.getElementById('menuGlobalAdmin').style.display = 'none';
+            document.getElementById('menuEdicionRifa').style.display = 'flex';
+            document.getElementById('btnVolverMisRifas').style.display = 'block';
             
-            // Cargar datos en los inputs
             document.getElementById('inputNombreApp').value = configActiva.nombreApp || '';
             document.getElementById('inputTotalNumeros').value = configActiva.totalNumeros || 100;
             document.getElementById('inputPrecio').value = configActiva.precio || 5;
             document.getElementById('inputFecha').value = configActiva.fecha || '';
-            document.getElementById('inputNumWa').value = configActiva.wa || '';
-            document.getElementById('inputTgToken').value = configActiva.tgToken || '';
-            document.getElementById('inputTgChat').value = configActiva.tgChat || '';
             document.getElementById('temaSelect').value = configActiva.tema || 'gold';
             
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
             if(configActiva.premioUrl) document.getElementById('imgPremio').src = configActiva.premioUrl;
             
             document.getElementById('adminRifaActualTitulo').innerText = `Administrando: ${configActiva.nombreApp}`;
-            window.cambiarTab('gral'); 
+            window.cambiarTabRifa('gral'); 
             window.aplicarConfiguracionVisual(); 
             window.renderCuadriculaAdmin(); 
             window.actualizarListaAdmin();
         };
+
+        window.cerrarEdicionRifa = function() {
+            document.getElementById('menuEdicionRifa').style.display = 'none';
+            document.getElementById('btnVolverMisRifas').style.display = 'none';
+            document.getElementById('menuGlobalAdmin').style.display = 'flex';
+            document.getElementById('adminRifaActualTitulo').innerText = '';
+            window.cambiarTabGlobal('misrifas');
+        }
 
         window.guardarConfigRifa = async function() {
             configActiva.nombreApp = document.getElementById('inputNombreApp').value;
             configActiva.totalNumeros = parseInt(document.getElementById('inputTotalNumeros').value) || 100;
             configActiva.precio = document.getElementById('inputPrecio').value;
             configActiva.fecha = document.getElementById('inputFecha').value;
-            configActiva.wa = document.getElementById('inputNumWa').value;
-            configActiva.tgToken = document.getElementById('inputTgToken').value;
-            configActiva.tgChat = document.getElementById('inputTgChat').value;
             configActiva.tema = document.getElementById('temaSelect').value;
 
             listaRifasMaster[rifaActivaId] = configActiva; 
@@ -889,54 +872,61 @@
             window.renderCuadriculaAdmin();
         };
 
+        window.anunciarGanador = async function() {
+            let winNum = document.getElementById('inputNumGanador').value;
+            if(winNum === "") return alert("Debes ingresar un número.");
+            
+            configActiva.ganador = winNum;
+            if(dbActiva[winNum]) configActiva.ganadorNombre = dbActiva[winNum].nombre;
+            else configActiva.ganadorNombre = "Número no vendido 😔";
+
+            listaRifasMaster[rifaActivaId] = configActiva;
+            await sincronizarMaster();
+            alert("Ganador publicado en la pantalla de los clientes.");
+            window.aplicarConfiguracionVisual();
+        };
+
         window.aplicarConfiguracionVisual = function() {
             document.getElementById('tituloAppVisual').innerText = configActiva.nombreApp || "Crono Rifas";
             document.getElementById('precioBoleto').innerHTML = `$${configActiva.precio || 5} <span style="font-size: 12px; color: gray;">x Boleto</span>`;
             document.documentElement.setAttribute('data-theme', configActiva.tema || 'gold');
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
             if(configActiva.premioUrl) document.getElementById('imgPremio').src = configActiva.premioUrl;
+            
+            // Ganador
+            if(configActiva.ganador !== undefined && configActiva.ganador !== null && configActiva.ganador !== "") {
+                document.getElementById('bannerGanador').style.display = 'block';
+                document.getElementById('boletoGanadorVisual').innerText = configActiva.ganador;
+                document.getElementById('nombreGanadorVisual').innerText = configActiva.ganadorNombre;
+            } else {
+                document.getElementById('bannerGanador').style.display = 'none';
+            }
             window.iniciarTemporizador();
         };
 
         // ================= CUADRÍCULAS =================
         window.renderCuadriculaCliente = function() {
-            const grid = document.getElementById('cuadriculaCliente'); 
-            grid.innerHTML = ''; 
+            const grid = document.getElementById('cuadriculaCliente'); grid.innerHTML = ''; 
             let t = configActiva.totalNumeros || 100;
-            
             for (let i = 0; i < t; i++) {
-                let n = i.toString(); 
-                let div = document.createElement('div'); 
-                div.innerText = n;
-                
-                if(dbActiva[n]) {
-                    div.className = 'num agarrado'; 
-                } else { 
-                    div.className = 'num disponible'; 
-                    div.onclick = () => window.alternarSeleccionCliente(n, div); 
-                }
+                let n = i.toString(); let div = document.createElement('div'); div.innerText = n;
+                if(dbActiva[n]) { div.className = 'num agarrado'; } 
+                else { div.className = 'num disponible'; div.onclick = () => window.alternarSeleccionCliente(n, div); }
                 grid.appendChild(div);
             }
         };
 
         window.renderCuadriculaAdmin = function() {
-            const grid = document.getElementById('cuadriculaAdmin'); 
-            grid.innerHTML = ''; 
-            adminSeleccionados = []; 
-            document.getElementById('adminCantSel').innerText = "0";
-            
+            const grid = document.getElementById('cuadriculaAdmin'); grid.innerHTML = ''; 
+            adminSeleccionados = []; document.getElementById('adminCantSel').innerText = "0";
             let t = configActiva.totalNumeros || 100;
             for (let i = 0; i < t; i++) {
-                let n = i.toString(); 
-                let div = document.createElement('div'); 
-                div.innerText = n;
-                
+                let n = i.toString(); let div = document.createElement('div'); div.innerText = n;
                 if(dbActiva[n]) { 
                     div.className = `num ${dbActiva[n].estado}-admin`; 
                     div.onclick = () => { if(confirm(`¿Liberar boleto ${n}?`)) window.liberarBoleto(n); }; 
                 } else { 
-                    div.className = 'num disponible'; 
-                    div.onclick = () => window.alternarSeleccionAdmin(n, div); 
+                    div.className = 'num disponible'; div.onclick = () => window.alternarSeleccionAdmin(n, div); 
                 }
                 grid.appendChild(div);
             }
@@ -944,11 +934,8 @@
 
         window.alternarSeleccionCliente = function(n, el) {
             let i = numerosSeleccionados.indexOf(n); 
-            if(i > -1) { 
-                numerosSeleccionados.splice(i,1); el.classList.remove('seleccionado'); 
-            } else { 
-                numerosSeleccionados.push(n); el.classList.add('seleccionado'); 
-            }
+            if(i > -1) { numerosSeleccionados.splice(i,1); el.classList.remove('seleccionado'); } 
+            else { numerosSeleccionados.push(n); el.classList.add('seleccionado'); }
             document.getElementById('carritoCantidad').innerText = numerosSeleccionados.length; 
             document.getElementById('carritoTotal').innerText = (numerosSeleccionados.length * (configActiva.precio || 5)).toFixed(2);
             document.getElementById('carritoBar').classList.toggle('activo', numerosSeleccionados.length > 0);
@@ -956,15 +943,12 @@
 
         window.alternarSeleccionAdmin = function(n, el) {
             let i = adminSeleccionados.indexOf(n); 
-            if(i > -1) { 
-                adminSeleccionados.splice(i,1); el.classList.remove('seleccionado'); 
-            } else { 
-                adminSeleccionados.push(n); el.classList.add('seleccionado'); 
-            }
+            if(i > -1) { adminSeleccionados.splice(i,1); el.classList.remove('seleccionado'); } 
+            else { adminSeleccionados.push(n); el.classList.add('seleccionado'); }
             document.getElementById('adminCantSel').innerText = adminSeleccionados.length;
         };
 
-        // ================= VENTAS Y CHECKOUT =================
+        // ================= CHECKOUT Y RECIBO PROFESIONAL =================
         window.abrirModalCheckout = () => { 
             document.getElementById('resumenNumeros').innerText = numerosSeleccionados.join(', '); 
             document.getElementById('modalCheckout').style.display = 'flex'; 
@@ -981,14 +965,20 @@
         window.generarTicket = async function() {
             const nom = document.getElementById('clienteNombre').value; 
             const tel = document.getElementById('clienteTelefono').value;
+            const metodo = document.getElementById('clienteMetodo').value;
             if(!nom) return alert("Por favor ingresa tu nombre");
             
             numerosSeleccionados.forEach(n => dbActiva[n] = { estado: 'reservado', nombre: nom, telefono: tel });
             await sincronizarDBRifa(); 
             window.enviarTelegram(nom, tel, numerosSeleccionados.join(', '));
             
+            // Recibo Profesional UI
+            document.getElementById('ticketRifaNombre').innerText = configActiva.nombreApp || 'Crono Rifas';
             document.getElementById('ticketNombre').innerText = nom; 
+            document.getElementById('ticketPago').innerText = metodo;
             document.getElementById('ticketNumeros').innerText = numerosSeleccionados.join(' - ');
+            document.getElementById('ticketMontoTotal').innerText = (numerosSeleccionados.length * (configActiva.precio || 5)).toFixed(2);
+
             window.cerrarModales(); 
             document.getElementById('modalTicket').style.display = 'flex'; 
             window.renderCuadriculaCliente(); 
@@ -997,19 +987,16 @@
         window.confirmarVentaManual = async function() {
             const nom = document.getElementById('adminManualNombre').value || 'Venta Manual'; 
             const tel = document.getElementById('adminManualTelefono').value || '';
-            
             adminSeleccionados.forEach(n => dbActiva[n] = { estado: 'vendido', nombre: nom, telefono: tel });
             await sincronizarDBRifa(); 
-            
             window.cerrarModales(); 
             window.renderCuadriculaAdmin(); 
             window.actualizarListaAdmin();
         };
 
         window.finalizarCompra = function() {
-            const numWa = configActiva.wa || "50700000000"; 
-            const msg = `¡Hola! Reservé los números: *${numerosSeleccionados.join(', ')}* en la rifa ${configActiva.nombreApp}. Adjunto mi comprobante.`;
-            
+            const numWa = configGlobal.wa || "50700000000"; 
+            const msg = `¡Hola! Reservé los números: *${numerosSeleccionados.join(', ')}* en la rifa ${configActiva.nombreApp}. Adjunto mi ticket/comprobante de pago.`;
             window.cerrarModales(); 
             numerosSeleccionados = []; 
             document.getElementById('carritoBar').classList.remove('activo');
@@ -1017,23 +1004,19 @@
         };
 
         window.enviarTelegram = function(nom, tel, nums) {
-            if(!configActiva.tgToken || !configActiva.tgChat) return;
+            if(!configGlobal.tgToken || !configGlobal.tgChat) return;
             const txt = `🔔 *NUEVA COMPRA/RESERVA*\nRifa: ${configActiva.nombreApp}\nCliente: ${nom}\nTel: ${tel}\nBoletos: ${nums}`;
-            fetch(`https://api.telegram.org/bot${configActiva.tgToken}/sendMessage`, { 
-                method:'POST', 
-                headers:{'Content-Type':'application/json'}, 
-                body: JSON.stringify({ chat_id: configActiva.tgChat, text: txt, parse_mode: 'Markdown'}) 
-            }).catch(e => console.log("Error Telegram:", e));
+            fetch(`https://api.telegram.org/bot${configGlobal.tgToken}/sendMessage`, { 
+                method:'POST', headers:{'Content-Type':'application/json'}, 
+                body: JSON.stringify({ chat_id: configGlobal.tgChat, text: txt, parse_mode: 'Markdown'}) 
+            }).catch(e => console.log(e));
         };
 
-        // ================= PANEL DE LISTA DE PAGOS =================
+        // ================= PANEL ADMINISTRADOR Y EDICIÓN (Cambio de Número) =================
         window.actualizarListaAdmin = function() {
-            const tbody = document.querySelector('#tablaParticipantes tbody'); 
-            tbody.innerHTML = '';
-            
+            const tbody = document.querySelector('#tablaParticipantes tbody'); tbody.innerHTML = '';
             for(let num in dbActiva) {
-                let c = dbActiva[num]; 
-                let isPag = c.estado === 'vendido';
+                let c = dbActiva[num]; let isPag = c.estado === 'vendido';
                 tbody.innerHTML += `<tr>
                     <td><strong>${num}</strong></td>
                     <td>${c.nombre} <br><span style="font-size:10px;">${c.telefono||''}</span> <br><small style="color:${isPag?'green':'orange'}">${c.estado.toUpperCase()}</small></td>
@@ -1052,18 +1035,36 @@
         window.abrirModalEditar = function(num) {
             document.getElementById('editBoletoNum').innerText = num; 
             document.getElementById('editBoletoNumHidden').value = num;
+            document.getElementById('editNuevoNum').value = ''; 
             document.getElementById('editNombre').value = dbActiva[num].nombre || ''; 
             document.getElementById('editTelefono').value = dbActiva[num].telefono || '';
             document.getElementById('modalEditarBoleto').style.display = 'flex';
         };
 
         window.guardarEdicionBoleto = async function() {
-            let num = document.getElementById('editBoletoNumHidden').value; 
-            dbActiva[num].nombre = document.getElementById('editNombre').value; 
-            dbActiva[num].telefono = document.getElementById('editTelefono').value;
+            let numViejo = document.getElementById('editBoletoNumHidden').value; 
+            let numNuevo = document.getElementById('editNuevoNum').value;
+            let nom = document.getElementById('editNombre').value; 
+            let tel = document.getElementById('editTelefono').value;
+            
+            // Lógica si el admin quiere cambiarle el número al cliente
+            if(numNuevo && numNuevo !== numViejo) {
+                if(dbActiva[numNuevo]) return alert("Ese número ya está ocupado por otra persona.");
+                if(parseInt(numNuevo) >= (configActiva.totalNumeros || 100)) return alert("El número supera el total de la rifa.");
+                
+                let estadoActual = dbActiva[numViejo].estado;
+                dbActiva[numNuevo] = { estado: estadoActual, nombre: nom, telefono: tel };
+                delete dbActiva[numViejo];
+            } else {
+                // Solo se edita el nombre/teléfono
+                dbActiva[numViejo].nombre = nom; 
+                dbActiva[numViejo].telefono = tel;
+            }
+
             await sincronizarDBRifa(); 
             window.cerrarModales(); 
             window.actualizarListaAdmin();
+            window.renderCuadriculaAdmin();
         };
 
         // ================= IMPRESIÓN (RAWBT y PDF CARTA) =================
@@ -1077,8 +1078,9 @@
 
         window.generarPDFRifa = function(id) {
             let configPDF = listaRifasMaster[id]; 
-            let dbPDF = JSON.parse(localStorage.getItem('local_db_' + id)) || {}; // Si usa local
-            // TODO: si usa firebase, buscar db específica, pero simplificado lee local/cache
+            let dbPDF = usaFirebase ? dbActiva : (JSON.parse(localStorage.getItem('local_db_' + id)) || {}); 
+            // Nota: Si se presiona desde el menú maestro y hay varias rifas, lo ideal es que imprima la db local o haga un getDoc
+            // Aquí usamos la dbActiva actual por simplicidad en el entorno local.
             
             let html = `
             <div class="print-letter">
@@ -1094,10 +1096,9 @@
                     </tr>`;
             
             let ingresos = 0;
-            // Solo imprimir los ocupados para no gastar hojas
             for(let i=0; i<configPDF.totalNumeros; i++) {
                 let n = i.toString();
-                if(dbActiva[n]) { // Se usa la base activa actual
+                if(dbActiva[n]) { 
                     let item = dbActiva[n];
                     html += `<tr style="color: #333;">
                         <td style="border: 1px solid #ccc; padding:8px;">${n}</td>
@@ -1108,10 +1109,7 @@
                     if(item.estado === 'vendido') ingresos += parseFloat(configPDF.precio); 
                 }
             }
-            html += `</table>
-                <h3 style="text-align:right; margin-top:30px; color:#333;">Ingresos Confirmados (Pagados): $${ingresos.toFixed(2)}</h3>
-            </div>`;
-            
+            html += `</table><h3 style="text-align:right; margin-top:30px; color:#333;">Ingresos Confirmados (Pagados): $${ingresos.toFixed(2)}</h3></div>`;
             document.getElementById('printArea').innerHTML = html; 
             alert("Se abrirá el cuadro de impresión. Asegúrate de elegir 'Guardar como PDF' y tamaño 'Carta'."); 
             window.print();
@@ -1133,6 +1131,20 @@
             document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(link)}&color=${color}&bgcolor=${bg}`;
         };
 
+        // ================= SUBIDA DE IMÁGENES =================
+        window.subirImagenFirebase = function(event, imgElementId, configKey) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader(); reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; }; reader.readAsDataURL(file);
+            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
+
+            const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto en la nube!"); });
+            });
+        };
+
         // ================= NAVEGACIÓN Y UTILIDADES =================
         window.mostrarLoginAdmin = () => document.getElementById('modalLogin').style.display = 'flex';
         
@@ -1142,34 +1154,30 @@
                 document.getElementById('vistaCliente').style.display = 'none'; 
                 document.getElementById('vistaAdmin').style.display = 'block';
                 window.renderListaMisRifas(); 
-                window.cambiarTab('misrifas');
-                ['Gral', 'Manual', 'Diseno', 'Lista'].forEach(t => document.getElementById('tabBtn'+t).style.display = 'none'); 
-                document.getElementById('adminRifaActualTitulo').innerText = '';
+                window.cerrarEdicionRifa(); // Asegura que vayamos al panel maestro
             } else alert("Clave errónea. Intenta con admin123");
         };
 
         window.cerrarPanelAdminYVerCliente = () => { 
-            if(rifaActivaId) {
-                window.location.href = `${window.location.href.split('?')[0]}?rifa=${rifaActivaId}`; 
-            } else { 
-                document.getElementById('vistaAdmin').style.display = 'none'; 
-                document.getElementById('vistaCliente').style.display = 'block'; 
-            } 
+            if(rifaActivaId) { window.location.href = `${window.location.href.split('?')[0]}?rifa=${rifaActivaId}`; } 
+            else { document.getElementById('vistaAdmin').style.display = 'none'; document.getElementById('vistaCliente').style.display = 'block'; } 
         };
         
         window.cerrarModales = () => document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
         
-        window.cambiarTab = tab => { 
+        window.cambiarTabGlobal = tab => { 
             document.querySelectorAll('.admin-tab, .admin-nav button').forEach(el => el.classList.remove('active')); 
             document.getElementById(`tab-${tab}`).classList.add('active'); 
             document.getElementById(`tabBtn${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active'); 
         };
-        
-        window.cambiarTema = () => { 
-            document.documentElement.setAttribute('data-theme', document.getElementById('temaSelect').value); 
-            document.documentElement.style.removeProperty('--primary'); 
+
+        window.cambiarTabRifa = tab => { 
+            document.querySelectorAll('.admin-tab, #menuEdicionRifa button').forEach(el => el.classList.remove('active')); 
+            document.getElementById(`tab-${tab}`).classList.add('active'); 
+            document.getElementById(`tabBtn${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active'); 
         };
-        
+
+        window.cambiarTema = () => { document.documentElement.setAttribute('data-theme', document.getElementById('temaSelect').value); document.documentElement.style.removeProperty('--primary'); };
         window.cambiarColorMain = () => document.documentElement.style.setProperty('--primary', document.getElementById('colorPicker').value);
         window.actualizarTexto = (id, val) => document.getElementById(id).innerText = val;
         window.actualizarPrecio = () => { document.getElementById('precioBoleto').innerHTML = `$${document.getElementById('inputPrecio').value} <span style="font-size: 12px; color: gray;">x Boleto</span>`; };
@@ -1177,32 +1185,19 @@
         // ================= TEMPORIZADOR Y ANIMACIONES =================
         let timerInterval;
         window.iniciarTemporizador = () => {
-            clearInterval(timerInterval); 
-            if(!configActiva.fecha) return; 
-            
+            clearInterval(timerInterval); if(!configActiva.fecha) return; 
             const dest = new Date(configActiva.fecha).getTime();
             timerInterval = setInterval(() => {
                 const d = dest - new Date().getTime(); 
-                if (d < 0) { 
-                    document.getElementById('temporizador').innerText = "¡SORTEO EN CURSO!"; 
-                    clearInterval(timerInterval); 
-                    return; 
-                }
-                let dias = Math.floor(d/(1000*60*60*24));
-                let horas = Math.floor((d%(1000*60*60*24))/(1000*60*60));
-                let min = Math.floor((d%(1000*60*60))/(1000*60));
-                let seg = Math.floor((d%(1000*60))/1000);
+                if (d < 0) { document.getElementById('temporizador').innerText = "¡SORTEO EN CURSO!"; clearInterval(timerInterval); return; }
+                let dias = Math.floor(d/(1000*60*60*24)); let horas = Math.floor((d%(1000*60*60*24))/(1000*60*60)); let min = Math.floor((d%(1000*60*60))/(1000*60)); let seg = Math.floor((d%(1000*60))/1000);
                 document.getElementById('temporizador').innerText = `Sorteo en: ${dias}d ${horas}h ${min}m ${seg}s`;
             }, 1000);
         };
 
         window.generarAnimaciones = () => {
-            const cont = document.getElementById('contenedorAnimaciones'); 
-            cont.innerHTML = '';
-            
-            let emojis = Array.from(document.querySelectorAll('#checksAnim input:checked')).map(cb => cb.value); 
-            if(emojis.length === 0) return;
-            
+            const cont = document.getElementById('contenedorAnimaciones'); cont.innerHTML = '';
+            let emojis = Array.from(document.querySelectorAll('#checksAnim input:checked')).map(cb => cb.value); if(emojis.length === 0) return;
             let cant = document.getElementById('animCant') ? document.getElementById('animCant').value : 15; 
             let size = document.getElementById('animSize') ? document.getElementById('animSize').value + 'px' : '30px'; 
             let bSpd = document.getElementById('animSpeed') ? document.getElementById('animSpeed').value : 10; 
@@ -1210,14 +1205,9 @@
             cont.style.zIndex = document.getElementById('animZIndex') ? document.getElementById('animZIndex').value : 0;
             
             for(let i=0; i<cant; i++) {
-                let div = document.createElement('div'); 
-                div.className = 'item-flotante'; 
-                div.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                div.style.fontSize = size; 
-                div.style.opacity = opac; 
-                div.style.left = Math.random() * 100 + 'vw';
-                div.style.animationDuration = (Math.random() * 5 + parseInt(bSpd)) + 's'; 
-                div.style.animationDelay = (Math.random() * 10) + 's';
+                let div = document.createElement('div'); div.className = 'item-flotante'; div.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                div.style.fontSize = size; div.style.opacity = opac; div.style.left = Math.random() * 100 + 'vw';
+                div.style.animationDuration = (Math.random() * 5 + parseInt(bSpd)) + 's'; div.style.animationDelay = (Math.random() * 10) + 's';
                 cont.appendChild(div);
             }
         };
