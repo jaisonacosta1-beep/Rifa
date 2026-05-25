@@ -6,7 +6,7 @@
     <title>Sistema de Rifas Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* MOTOR DE 15 TEMAS - COMPLETO Y SIN RECORTES */
+        /* MOTOR DE 15 TEMAS - COMPLETO Y EXTENDIDO */
         :root {
             --bg-color: #111111; --card-bg: #222222; --text-main: #F6E05E; 
             --primary: #D69E2E; --primary-hover: #B7791F;
@@ -167,12 +167,10 @@
         
         <div id="menuRifasCliente" style="display: none;">
             <h2 style="text-align: center; margin-bottom: 20px;">Seleccione el sorteo de su preferencia 👇</h2>
-            <div id="listaRifasDisponibles">
-                </div>
+            <div id="listaRifasDisponibles"></div>
         </div>
 
         <div id="contenidoRifaActiva">
-            
             <button id="btnVolverCatalogo" class="btn btn-outline" style="display:none; margin-bottom:15px; font-size: 14px; padding: 10px;" onclick="window.location.href=window.location.href.split('?')[0]">🔙 Volver a todos los sorteos</button>
 
             <div id="bannerGanador" class="banner-ganador" style="display: none;">
@@ -379,8 +377,8 @@
 
     <div id="modalCheckout" class="modal">
         <div class="modal-content">
-            <h2 style="text-align: center;">Confirmar Reserva</h2>
-            <p style="text-align: center;">Números: <strong id="resumenNumeros"></strong></p>
+            <h2>Confirmar Reserva</h2>
+            <p>Números: <strong id="resumenNumeros"></strong></p>
             <input type="text" id="clienteNombre" placeholder="Tu Nombre Completo" required>
             <input type="tel" id="clienteTelefono" placeholder="Teléfono / WhatsApp" required>
             <select id="clienteMetodo">
@@ -398,21 +396,28 @@
     <div id="modalVentaManual" class="modal">
         <div class="modal-content">
             <h2 style="text-align: center;">Registrar Venta</h2>
-            <p style="text-align: center;">Boletos: <strong id="manualNumVisual"></strong></p>
+            <p style="text-align: center;">Boletos seleccionados: <strong id="manualNumVisual"></strong></p>
             <input type="text" id="adminManualNombre" placeholder="Nombre Comprador" required>
             <input type="tel" id="adminManualTelefono" placeholder="Teléfono Comprador" required>
-            <button class="btn btn-success" onclick="confirmarVentaManual()">Marcar Vendido</button>
+            
+            <label style="font-size: 12px; font-weight: bold; margin-bottom: 5px; display: block;">Estado de la venta:</label>
+            <select id="adminManualEstado">
+                <option value="vendido">Ya pagó (Vendido / Rojo)</option>
+                <option value="reservado">Pendiente de pago (Reservado / Amarillo)</option>
+            </select>
+
+            <button class="btn btn-success" onclick="confirmarVentaManual()">Marcar Registro</button>
             <button class="btn btn-danger" onclick="cerrarModales()">Cancelar</button>
         </div>
     </div>
 
     <div id="modalEditarBoleto" class="modal">
         <div class="modal-content">
-            <h2 style="text-align: center;">Editar Boleto</h2>
-            <p style="text-align: center; color: var(--primary);">Boleto Actual: <strong id="editBoletoNum"></strong></p>
+            <h2>Editar Boleto</h2>
+            <p>Boleto Actual: <strong id="editBoletoNum"></strong></p>
             <input type="hidden" id="editBoletoNumHidden">
             <label style="font-size: 12px; font-weight: bold;">Mover a otro número (Opcional):</label>
-            <input type="number" id="editNuevoNum" placeholder="Nuevo número" style="border: 2px solid var(--primary);">
+            <input type="number" id="editNuevoNum" placeholder="Nuevo número">
             <label style="font-size: 12px; font-weight: bold;">Nombre del Cliente:</label>
             <input type="text" id="editNombre" required>
             <label style="font-size: 12px; font-weight: bold;">Teléfono del Cliente:</label>
@@ -465,7 +470,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
         // ========================================================
         // TUS CREDENCIALES DE FIREBASE (PROYECTO: rifa-5e1ec)
@@ -507,30 +512,26 @@
         // ================= ARRANQUE Y CARGA DE DATOS =================
         async function initAppGlobal() {
             try {
-                // Cargar Configuración Universal (Contraseña, Logo Global, etc)
                 const docGlobal = await getDoc(doc(db, "CronoRifas_System", "GlobalSettings"));
                 if(docGlobal.exists()) configGlobal = docGlobal.data();
                 
-                // Cargar Lista de Rifas
                 const docSnap = await getDoc(doc(db, "CronoRifas_System", "MasterList"));
                 if (docSnap.exists()) listaRifasMaster = docSnap.data();
                 
                 usaFirebase = true;
             } catch (error) {
-                console.warn("Usando Modo Local Temporal (Revisa Reglas de Firebase)", error);
+                console.warn("Error cargando DB. ¿Reglas correctas en Firestore?", error);
                 usaFirebase = false;
                 listaRifasMaster = JSON.parse(localStorage.getItem('local_master')) || {};
                 let localG = JSON.parse(localStorage.getItem('local_global'));
                 if(localG) configGlobal = localG;
             }
 
-            // Llenar inputs globales en el panel de admin
             document.getElementById('globalNumWa').value = configGlobal.wa || '';
             document.getElementById('globalTgToken').value = configGlobal.tgToken || '';
             document.getElementById('globalTgChat').value = configGlobal.tgChat || '';
             document.getElementById('globalAdminPass').value = configGlobal.adminPass || 'admin123';
 
-            // Aplicar Logo Global si existe (para que no salga roto)
             if(configGlobal.logoUrl) {
                 document.getElementById('logoApp').src = configGlobal.logoUrl;
             } else {
@@ -557,7 +558,6 @@
                     window.renderCuadriculaCliente();
                 }
             } else if (!rifaActivaId) {
-                // Si no hay ID, mostrar el catálogo
                 generarMenuInicioCliente();
             } else {
                 document.getElementById('tituloAppVisual').innerText = "Rifa no encontrada";
@@ -613,7 +613,7 @@
             };
             if(usaFirebase) { try { await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal); } catch(e){} }
             localStorage.setItem('local_global', JSON.stringify(configGlobal));
-            alert("✅ Configuración Universal y Contraseña Guardadas.");
+            alert("✅ Configuración Universal Guardada Exitosamente.");
         };
 
         // ================= GESTOR CENTRAL DE RIFAS =================
@@ -625,7 +625,6 @@
 
         window.renderListaMisRifas = function() {
             const cont = document.getElementById('listaMisRifas'); cont.innerHTML = '';
-            
             const baseUrl = window.location.href.split('?')[0];
             document.getElementById('linkCatalogoPrincipal').value = baseUrl;
 
@@ -713,7 +712,6 @@
             document.getElementById('inputFecha').value = configActiva.fecha || '';
             document.getElementById('temaSelect').value = configActiva.tema || 'gold';
             
-            // Prioridad de Logo: 1. Especifico de Rifa, 2. Global, 3. Placeholder
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
             else if(configGlobal.logoUrl) document.getElementById('logoApp').src = configGlobal.logoUrl;
 
@@ -744,7 +742,7 @@
             listaRifasMaster[rifaActivaId] = configActiva; 
             await sincronizarMaster(); 
             
-            alert("💾 Configuración de Rifa Guardada.");
+            alert("💾 Datos de Rifa Guardados Correctamente.");
             window.aplicarConfiguracionVisual(); 
             window.renderCuadriculaAdmin();
         };
@@ -753,13 +751,16 @@
             let winNum = document.getElementById('inputNumGanador').value;
             if(winNum === "") return alert("Debes ingresar un número.");
             
+            // AÑADIDO: Formato a 2 dígitos para búsquedas con cero adelante
+            winNum = winNum.toString().padStart(2, '0'); 
+            
             configActiva.ganador = winNum;
             if(dbActiva[winNum]) configActiva.ganadorNombre = dbActiva[winNum].nombre;
             else configActiva.ganadorNombre = "Número no vendido 😔";
 
             listaRifasMaster[rifaActivaId] = configActiva;
             await sincronizarMaster();
-            alert("Ganador publicado en la pantalla de los clientes.");
+            alert("Ganador publicado.");
             window.aplicarConfiguracionVisual();
         };
 
@@ -768,14 +769,12 @@
             document.getElementById('precioBoleto').innerHTML = `$${configActiva.precio || 5} <span style="font-size: 12px; color: gray;">x Boleto</span>`;
             document.documentElement.setAttribute('data-theme', configActiva.tema || 'gold');
             
-            // Revertir a global o default si no hay imagen configurada para evitar cuadrados rotos
             if(configActiva.logoUrl) document.getElementById('logoApp').src = configActiva.logoUrl;
             else if(configGlobal.logoUrl) document.getElementById('logoApp').src = configGlobal.logoUrl;
             else document.getElementById('logoApp').src = "https://via.placeholder.com/150?text=Logo";
             
             document.getElementById('imgPremio').src = configActiva.premioUrl || "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80";
             
-            // Banner Ganador
             if(configActiva.ganador !== undefined && configActiva.ganador !== null && configActiva.ganador !== "") {
                 document.getElementById('bannerGanador').style.display = 'block';
                 document.getElementById('boletoGanadorVisual').innerText = configActiva.ganador;
@@ -788,12 +787,15 @@
             window.iniciarTemporizador();
         };
 
-        // ================= CUADRÍCULAS =================
+        // ================= CUADRÍCULAS (AHORA CON CEROS POR DELANTE) =================
         window.renderCuadriculaCliente = function() {
             const grid = document.getElementById('cuadriculaCliente'); grid.innerHTML = ''; 
             let t = configActiva.totalNumeros || 100;
             for (let i = 0; i < t; i++) {
-                let n = i.toString(); let div = document.createElement('div'); div.innerText = n;
+                // AÑADIDO: Agrega ceros al inicio del 0 al 9
+                let n = i.toString().padStart(2, '0'); 
+                
+                let div = document.createElement('div'); div.innerText = n;
                 if(dbActiva[n]) { div.className = 'num agarrado'; } 
                 else { div.className = 'num disponible'; div.onclick = () => window.alternarSeleccionCliente(n, div); }
                 grid.appendChild(div);
@@ -805,7 +807,10 @@
             adminSeleccionados = []; document.getElementById('adminCantSel').innerText = "0";
             let t = configActiva.totalNumeros || 100;
             for (let i = 0; i < t; i++) {
-                let n = i.toString(); let div = document.createElement('div'); div.innerText = n;
+                // AÑADIDO: Agrega ceros al inicio del 0 al 9
+                let n = i.toString().padStart(2, '0'); 
+                
+                let div = document.createElement('div'); div.innerText = n;
                 if(dbActiva[n]) { 
                     div.className = `num ${dbActiva[n].estado}-admin`; 
                     div.onclick = () => { if(confirm(`¿Liberar boleto ${n}?`)) window.liberarBoleto(n); }; 
@@ -856,7 +861,6 @@
             await sincronizarDBRifa(); 
             window.enviarTelegram(nom, tel, numerosSeleccionados.join(', '));
             
-            // Llenar Recibo Profesional
             const fechaActual = new Date();
             const txID = "TX-" + Math.floor(Math.random() * 1000000);
             
@@ -865,7 +869,7 @@
             document.getElementById('ticketRifaNombre').innerText = configActiva.nombreApp || 'Crono Rifas';
             document.getElementById('ticketNombre').innerText = nom; 
             document.getElementById('ticketPago').innerText = metodo;
-            document.getElementById('ticketNumeros').innerText = numerosSeleccionados.join(' - ');
+            document.getElementById('ticketNumeros').innerText = numerosSeleccionados.join(', ');
             
             let precio = configActiva.precio || 5;
             document.getElementById('ticketPrecioUnitario').innerText = parseFloat(precio).toFixed(2);
@@ -879,16 +883,19 @@
         window.confirmarVentaManual = async function() {
             const nom = document.getElementById('adminManualNombre').value || 'Venta Manual'; 
             const tel = document.getElementById('adminManualTelefono').value || '';
-            adminSeleccionados.forEach(n => dbActiva[n] = { estado: 'vendido', nombre: nom, telefono: tel });
+            const estadoSelect = document.getElementById('adminManualEstado').value || 'vendido';
+            
+            adminSeleccionados.forEach(n => dbActiva[n] = { estado: estadoSelect, nombre: nom, telefono: tel });
             await sincronizarDBRifa(); 
             window.cerrarModales(); 
             window.renderCuadriculaAdmin(); 
             window.actualizarListaAdmin();
+            alert("✅ Registro guardado como: " + estadoSelect.toUpperCase());
         };
 
         window.finalizarCompra = function() {
             const numWa = configGlobal.wa || "50700000000"; 
-            const msg = `¡Hola! Reservé los números: *${numerosSeleccionados.join(', ')}* en la rifa ${configActiva.nombreApp}. Adjunto mi ticket/comprobante de pago.`;
+            const msg = `¡Hola! Reservé los números: *${numerosSeleccionados.join(', ')}* en la rifa ${configActiva.nombreApp}. Adjunto comprobante.`;
             window.cerrarModales(); 
             numerosSeleccionados = []; 
             document.getElementById('carritoBar').classList.remove('activo');
@@ -939,7 +946,9 @@
             let nom = document.getElementById('editNombre').value; 
             let tel = document.getElementById('editTelefono').value;
             
-            // Lógica si el admin quiere cambiarle el número al cliente
+            // AÑADIDO: Rellenar con cero por si el admin digita "5" en vez de "05" al editar
+            if(numNuevo) numNuevo = numNuevo.toString().padStart(2, '0');
+
             if(numNuevo && numNuevo !== numViejo) {
                 if(dbActiva[numNuevo]) return alert("Ese número ya está ocupado por otra persona.");
                 if(parseInt(numNuevo) >= (configActiva.totalNumeros || 100)) return alert("El número supera el total de la rifa.");
@@ -956,15 +965,23 @@
             window.cerrarModales(); 
             window.actualizarListaAdmin();
             window.renderCuadriculaAdmin();
+            alert("Boleto actualizado correctamente.");
         };
 
-        // ================= IMPRESIÓN (RAWBT TEXTO LARGO y PDF CARTA) =================
+        // ================= IMPRESIÓN (RAWBT TEXTO LARGO AGRUPADO) =================
         window.imprimirRawBT = function(num) {
             let c = dbActiva[num];
-            if(confirm(`¿Imprimir ticket largo para ${c.nombre} (Boleto #${num}) en RawBT?`)) {
+            
+            let todosLosBoletos = Object.keys(dbActiva).filter(k => dbActiva[k].nombre === c.nombre && dbActiva[k].telefono === c.telefono);
+            let boletosStr = todosLosBoletos.join(', ');
+
+            if(confirm(`¿Imprimir ticket en RawBT para ${c.nombre}?\nIncluirá los boletos: ${boletosStr}`)) {
                 const fechaActual = new Date();
                 const fechaStr = fechaActual.toLocaleDateString() + " " + fechaActual.toLocaleTimeString();
                 const txID = "TX-" + Math.floor(Math.random() * 1000000);
+                
+                let precioUnitario = parseFloat(configActiva.precio || 5);
+                let total = precioUnitario * todosLosBoletos.length;
                 
                 let txt = `================================\n`;
                 txt += `      COMPROBANTE DE RESERVA\n`;
@@ -977,11 +994,12 @@
                 txt += `Nombre: ${c.nombre}\n`;
                 txt += `Telefono: ${c.telefono || 'N/A'}\n`;
                 txt += `--------------------------------\n\n`;
-                txt += `BOLETO ASIGNADO: #${num}\n`;
+                txt += `BOLETOS ASIGNADOS:\n`;
+                txt += `[ ${boletosStr} ]\n\n`;
                 txt += `ESTADO: ${c.estado.toUpperCase()}\n`;
-                txt += `PRECIO UNITARIO: $${parseFloat(configActiva.precio || 5).toFixed(2)}\n\n`;
+                txt += `PRECIO UNITARIO: $${precioUnitario.toFixed(2)}\n\n`;
                 txt += `--------------------------------\n`;
-                txt += `TOTAL A PAGAR: $${parseFloat(configActiva.precio || 5).toFixed(2)}\n`;
+                txt += `TOTAL A PAGAR: $${total.toFixed(2)}\n`;
                 txt += `--------------------------------\n\n`;
                 txt += `TERMINOS Y CONDICIONES:\n`;
                 txt += `Este boleto es su comprobante\n`;
@@ -1015,7 +1033,8 @@
             
             let ingresos = 0;
             for(let i=0; i<configPDF.totalNumeros; i++) {
-                let n = i.toString();
+                // AÑADIDO: Agrega ceros al inicio del 0 al 9 en el listado PDF
+                let n = i.toString().padStart(2, '0'); 
                 if(dbPDF[n]) { 
                     let item = dbPDF[n];
                     html += `<tr style="color: #333;">
@@ -1050,32 +1069,62 @@
         };
 
         // ================= SUBIDA DE IMÁGENES =================
-        window.subirImagenGlobal = function(event) {
+        window.subirImagenGlobal = async function(event) {
             const file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader(); reader.onload = e => { document.getElementById('logoApp').src = e.target.result; configGlobal.logoUrl = e.target.result; }; reader.readAsDataURL(file);
+            document.getElementById('logoApp').style.opacity = '0.5'; 
             
-            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
+            if(!usaFirebase) {
+                const reader = new FileReader(); 
+                reader.onload = e => { document.getElementById('logoApp').src = e.target.result; configGlobal.logoUrl = e.target.result; document.getElementById('logoApp').style.opacity = '1';}; 
+                reader.readAsDataURL(file);
+                return alert("Imagen cargada en modo Local (Firebase inactivo).");
+            }
 
-            const storageRef = ref(storage, `CronoRifas_System/Global/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(url => { configGlobal.logoUrl = url; alert("¡Logo Global guardado en la nube!"); });
-            });
+            try {
+                const storageRef = ref(storage, `CronoRifas_System/Global/${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(snapshot.ref);
+                
+                configGlobal.logoUrl = url;
+                document.getElementById('logoApp').src = url;
+                await setDoc(doc(db, "CronoRifas_System", "GlobalSettings"), configGlobal);
+                alert("✅ ¡Logo Global guardado permanentemente en la nube!");
+            } catch(e) {
+                console.error(e);
+                alert("Error al subir. Asegúrate de haber modificado las Reglas de Storage en Firebase.");
+            }
+            document.getElementById('logoApp').style.opacity = '1';
         };
 
-        window.subirImagenFirebase = function(event, imgElementId, configKey) {
+        window.subirImagenFirebase = async function(event, imgElementId, configKey) {
             const file = event.target.files[0];
             if (!file) return;
-            const reader = new FileReader(); reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; }; reader.readAsDataURL(file);
+            document.getElementById(imgElementId).style.opacity = '0.5'; 
             
-            if(!usaFirebase) return alert("Imagen cargada temporalmente (Firebase inactivo).");
+            if(!usaFirebase) {
+                const reader = new FileReader(); 
+                reader.onload = e => { document.getElementById(imgElementId).src = e.target.result; configActiva[configKey] = e.target.result; document.getElementById(imgElementId).style.opacity = '1';}; 
+                reader.readAsDataURL(file);
+                return alert("Imagen cargada en modo Local.");
+            }
 
-            const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on('state_changed', null, err => alert("Error subiendo foto."), () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(url => { configActiva[configKey] = url; alert("¡Foto de Rifa guardada en la nube!"); });
-            });
+            try {
+                const storageRef = ref(storage, `CronoRifas_System/${rifaActivaId}/${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(snapshot.ref);
+                
+                configActiva[configKey] = url;
+                document.getElementById(imgElementId).src = url;
+                
+                listaRifasMaster[rifaActivaId] = configActiva;
+                await setDoc(doc(db, "CronoRifas_System", "MasterList"), listaRifasMaster);
+                alert("✅ ¡Foto del Premio guardada en la nube exitosamente!");
+            } catch(e) {
+                console.error(e);
+                alert("Error al subir. Asegúrate de haber modificado las Reglas de Storage.");
+            }
+            document.getElementById(imgElementId).style.opacity = '1';
         };
 
         // ================= NAVEGACIÓN Y UTILIDADES =================
